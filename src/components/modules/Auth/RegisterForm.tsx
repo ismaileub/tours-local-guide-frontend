@@ -13,31 +13,36 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { register } from "@/actions/auth";
+
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-
-// type RegisterFormValues = {
-//   name: string;
-//   email: string;
-//   phone: string;
-//   password: string;
-// };
+import { register } from "@/actions/auth";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function RegisterForm() {
   const form = useForm<FieldValues>({
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
       password: "",
+      role: "",
     },
   });
+
   const router = useRouter();
+
   const onSubmit = async (values: FieldValues) => {
     try {
+      console.log(values);
       const res = await register(values);
-      if (res?.id) {
+      console.log(res);
+      if (res?.data._id) {
         toast.success("User Registered Successfully");
         router.push("/login");
       }
@@ -54,10 +59,12 @@ export default function RegisterForm() {
           className="space-y-6 w-full max-w-md bg-white p-8 rounded-lg shadow-md"
         >
           <h2 className="text-3xl font-bold text-center">Register Now</h2>
+
           {/* Name */}
           <FormField
             control={form.control}
             name="name"
+            rules={{ required: "Name is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Name</FormLabel>
@@ -68,10 +75,12 @@ export default function RegisterForm() {
               </FormItem>
             )}
           />
+
           {/* Email */}
           <FormField
             control={form.control}
             name="email"
+            rules={{ required: "Email is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
@@ -86,24 +95,39 @@ export default function RegisterForm() {
               </FormItem>
             )}
           />
-          {/* Phone */}
+
+          {/* Role */}
           <FormField
             control={form.control}
-            name="phone"
+            name="role"
+            rules={{ required: "Role is required" }}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter your phone number" {...field} />
-                </FormControl>
+                <FormLabel>Select Role</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose role" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="GUIDE">Guide</SelectItem>
+                    <SelectItem value="TOURIST">Tourist</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           {/* Password */}
           <FormField
             control={form.control}
             name="password"
+            rules={{ required: "Password is required" }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
