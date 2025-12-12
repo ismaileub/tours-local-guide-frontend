@@ -10,6 +10,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       role?: string | null;
+      accessToken?: string | null;
     };
   }
   interface User {
@@ -17,6 +18,7 @@ declare module "next-auth" {
     name?: string | null;
     email?: string | null;
     role?: string | null;
+    accessToken?: string | null;
   }
 }
 
@@ -47,6 +49,7 @@ export const authOptions: NextAuthOptions = {
               headers: {
                 "Content-Type": "application/json",
               },
+              credentials: "include",
               body: JSON.stringify({
                 email: credentials.email,
                 password: credentials.password,
@@ -67,6 +70,7 @@ export const authOptions: NextAuthOptions = {
               name: user?.data.name,
               email: user?.data.email,
               role: user.data.role,
+              accessToken: user.data.accessToken,
             };
           } else {
             return null;
@@ -83,6 +87,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user?.id;
         token.role = (user as any).role;
+        token.accessToken = user.accessToken;
       }
       return token;
     },
@@ -90,6 +95,7 @@ export const authOptions: NextAuthOptions = {
       if (session?.user) {
         session.user.id = token?.id as string;
         session.user.role = token.role as string;
+        session.user.accessToken = token.accessToken as string;
       }
       return session;
     },

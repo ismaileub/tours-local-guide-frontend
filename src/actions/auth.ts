@@ -40,15 +40,15 @@ export const login = async (data: FieldValues) => {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include", // <- important!
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
   if (!res.ok) {
-    const text = await res.text();
+    const text = await res.json();
     console.error("Login Failed:", text);
     throw new Error(text);
   }
 
-  return await res.json(); // backend returns user info
+  return await res.json();
 };

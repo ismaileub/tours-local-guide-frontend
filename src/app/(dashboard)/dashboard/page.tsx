@@ -2,8 +2,7 @@ import { getUserSession } from "@/helpers/getUserSession";
 
 export default async function DashboardHome() {
   const session = await getUserSession();
-  // const role = session?.user?.role;
-  const role = "guide";
+  const role = session?.user?.role;
 
   return (
     <div className="p-6">
@@ -11,9 +10,9 @@ export default async function DashboardHome() {
       <p className="text-gray-600">{session?.user?.email}</p>
 
       <div className="mt-6 p-6 bg-white rounded-xl shadow-md">
-        {role === "admin" && <AdminDashboard />}
-        {role === "guide" && <GuideDashboard />}
-        {role === "tourist" && <TouristDashboard />}
+        {role === "ADMIN" && <AdminDashboard />}
+        {role === "GUIDE" && <GuideDashboard />}
+        {role === "TOURIST" && <TouristDashboard />}
       </div>
     </div>
   );

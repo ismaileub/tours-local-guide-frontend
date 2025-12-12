@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React from "react";
@@ -17,6 +18,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { login } from "@/actions/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // type LoginFormValues = {
 //   email: string;
@@ -24,6 +26,7 @@ import { toast } from "sonner";
 // };
 
 export default function LoginForm() {
+  const router = useRouter();
   const form = useForm<FieldValues>({
     defaultValues: {
       email: "",
@@ -33,18 +36,21 @@ export default function LoginForm() {
 
   const onSubmit = async (values: FieldValues) => {
     try {
-      // const res = await login(values);
-      // if (res?.data._id) {
-      //   toast.success("User Logged in Successfully");
-      // } else {
-      //   toast.error("User Login Failed");
-      // }
-      signIn("credentials", {
+      const res = await signIn("credentials", {
+        redirect: false,
         ...values,
-        callbackUrl: "/dashboard",
       });
-    } catch (err) {
-      console.error(err);
+      console.log(res);
+
+      if (!res?.ok) {
+        toast.error("Email or password wrong");
+        return;
+      }
+
+      toast.success("User Logged in successfully");
+      router.push("/dashboard");
+    } catch (err: any) {
+      toast.error("Something went wrong");
     }
   };
 
