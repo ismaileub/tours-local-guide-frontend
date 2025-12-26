@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 
 interface TourCardProps {
-  id: string;
+  _id: string;
   title: string;
   location: string;
   price: number;
@@ -15,7 +15,7 @@ interface TourCardProps {
 }
 
 const TourCard: React.FC<TourCardProps> = ({
-  id,
+  _id,
   title,
   location,
   price,
@@ -41,11 +41,11 @@ const TourCard: React.FC<TourCardProps> = ({
           <p className="text-sm text-blue-700 font-semibold">
             Type: {tourType}
           </p>
-          <p className="mt-2 font-medium">Price: BDT {price}</p>
+          <p className="mt-2 font-medium">Price: $ {price}</p>
           <p className="text-sm text-gray-600">Duration: {duration}</p>
         </div>
         <Link
-          href={`/dashboard/guide/tours/${id}`}
+          href={`/dashboard/guide/tours/${_id}`}
           className="mt-4 inline-block text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
         >
           View Details

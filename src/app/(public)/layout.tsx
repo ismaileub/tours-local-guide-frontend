@@ -1,3 +1,4 @@
+import ClientOnly from "@/components/ClientOnly";
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar/Navbar";
 
@@ -8,7 +9,10 @@ export default function PublicLayout({
 }>) {
   return (
     <>
-      <Navbar />
+      <ClientOnly>
+        <Navbar />
+      </ClientOnly>
+
       <main className="min-h-dvh max-w-400 mx-auto">{children}</main>
       <Footer />
     </>

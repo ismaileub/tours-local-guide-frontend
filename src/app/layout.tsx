@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next Blog",
-  description: "A simple blog built with Next.js, Tailwind CSS, and shadcn/ui.",
+  title: "Guide Hub",
+  description: "",
 };
 
 export default function RootLayout({

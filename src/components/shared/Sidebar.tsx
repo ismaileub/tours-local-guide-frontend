@@ -11,6 +11,8 @@ import {
   Calendar,
   Map,
   User,
+  CalendarCheck,
+  Clock,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
@@ -38,8 +40,17 @@ export default function Sidebar() {
 
     GUIDE: [
       { label: "Home", href: "/", icon: Home },
-      { label: "My Tours", href: "/dashboard/guide/tours", icon: Map },
-      { label: "Schedule", href: "/dashboard/guide/schedule", icon: Calendar },
+      { label: "My Listings", href: "/dashboard/guide/tours", icon: Map },
+      {
+        label: "Schedule",
+        href: "/dashboard/guide/schedule",
+        icon: CalendarCheck,
+      },
+      {
+        label: "Pending Requests",
+        href: "/dashboard/guide/pending-request",
+        icon: Clock,
+      },
       { label: "My Profile", href: "/dashboard/profile", icon: User },
     ],
 

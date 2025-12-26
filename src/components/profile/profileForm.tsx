@@ -8,12 +8,17 @@ import { toast } from "sonner";
 export default function ProfileForm({ user, token }: any) {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
     address: user?.address || "",
     pricePerHour: user?.pricePerHour || "",
+    languages: user?.languages?.join(", ") || "",
+    bio: user?.bio || "",
+    gender: user.gender || "",
   });
+
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(user?.picture || null);
 
@@ -34,15 +39,28 @@ export default function ProfileForm({ user, token }: any) {
   const handleUpdate = async () => {
     setLoading(true);
     try {
+      const payload = {
+        ...form,
+        languages:
+          user?.role === "GUIDE"
+            ? form.languages
+                .split(",")
+                .map((l: any) => l.trim())
+                .filter(Boolean)
+            : undefined,
+      };
+
       const formData = new FormData();
-      formData.append("data", JSON.stringify(form));
+      formData.append("data", JSON.stringify(payload));
       if (file) formData.append("file", file);
 
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_API}/users/updateMe`,
         {
           method: "PATCH",
-          headers: { authorization: `${token}` },
+          headers: {
+            authorization: token || "",
+          },
           body: formData,
         }
       );
@@ -62,161 +80,250 @@ export default function ProfileForm({ user, token }: any) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg border border-gray-200">
-      <div className="flex flex-col items-center">
-        {/* Profile Picture */}
-        <div className="relative w-62 h-62 mb-4 rounded-full overflow-hidden border-4 border-blue-500">
-          {preview ? (
-            <Image src={preview} alt="Profile" fill className="object-cover" />
-          ) : (
-            <div className="flex items-center justify-center w-full h-full bg-gray-200 text-gray-500">
-              No Image
-            </div>
-          )}
-        </div>
-
-        {!isEditing ? (
-          <>
-            <h2 className="text-2xl font-semibold mb-2">{user?.name}</h2>
-            <p className="text-gray-500 mb-1">Email: {user?.email}</p>
-            <p className="text-gray-500 mb-1">Role: {user?.role}</p>
-            <p className="text-gray-500 mb-1">Phone: {user?.phone || "N/A"}</p>
-            <p className="text-gray-500 mb-1">
-              Address: {user?.address || "N/A"}
-            </p>
-            {user?.role === "GUIDE" && (
-              <p className="text-gray-500 mb-1">
-                Price/Hour: {user?.pricePerHour} $
-              </p>
-            )}
-            <button
-              onClick={() => setIsEditing(true)}
-              className="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition"
-            >
-              Edit Profile
-            </button>
-          </>
-        ) : (
-          <div className="w-full mt-6 space-y-4">
-            {/* Name */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Name</label>
-              <input
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            {/* Email (read-only) */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Email</label>
-              <input
-                value={user?.email}
-                readOnly
-                className="border p-3 rounded-lg bg-gray-100 cursor-not-allowed"
-              />
-            </div>
-
-            {/* Role (read-only) */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Role</label>
-              <input
-                value={user?.role}
-                readOnly
-                className="border p-3 rounded-lg bg-gray-100 cursor-not-allowed"
-              />
-            </div>
-
-            {/* Phone */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Phone</label>
-              <input
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            {/* Address */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Address</label>
-              <input
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            {/* Price Per Hour for Guide */}
-            {user?.role === "GUIDE" && (
-              <div className="flex flex-col">
-                <label className="text-gray-600 mb-1">Price Per Hour($)</label>
-                <input
-                  name="pricePerHour"
-                  type="number"
-                  value={form.pricePerHour}
-                  onChange={handleChange}
-                  className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    <div className="max-w-5xl mx-auto mt-12 px-4">
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+        {/* ===== Header ===== */}
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            {/* Avatar */}
+            <div className="relative w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-white">
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="Profile"
+                  fill
+                  className="object-cover"
                 />
-              </div>
-            )}
-
-            {/* Profile Picture */}
-            <div className="flex flex-col">
-              <label className="text-gray-600 mb-1">Profile Picture</label>
-              <input
-                type="file"
-                onChange={(e: any) => setFile(e.target.files[0])}
-                className="border p-2 rounded-lg"
-              />
+              ) : (
+                <div className="flex items-center justify-center w-full h-full text-gray-400">
+                  No Image
+                </div>
+              )}
             </div>
 
-            {/* Buttons */}
-            <div className="flex gap-4 mt-4">
-              <button
-                onClick={handleUpdate}
-                disabled={loading}
-                className="flex items-center justify-center px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full transition"
-              >
-                {loading ? (
-                  <svg
-                    className="animate-spin h-5 w-5 mr-2 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 018 8h-4l3 3-3 3h4a8 8 0 01-8 8v-4l-3 3 3 3v-4a8 8 0 01-8-8z"
-                    ></path>
-                  </svg>
-                ) : null}
-                {loading ? "Updating..." : "Update"}
-              </button>
-
-              <button
-                onClick={() => setIsEditing(false)}
-                disabled={loading}
-                className="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-full transition"
-              >
-                Cancel
-              </button>
+            {/* Basic Info */}
+            <div className="text-center sm:text-left">
+              <h2 className="text-3xl font-bold">{user?.name}</h2>
+              <p className="opacity-90">{user?.email}</p>
+              <span className="inline-block mt-2 px-4 py-1 text-sm rounded-full bg-white/20">
+                {user?.role}
+              </span>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* ===== Content ===== */}
+        <div className="p-8">
+          {!isEditing ? (
+            <>
+              {/* ===== View Mode ===== */}
+              <div className="grid sm:grid-cols-2 gap-6 text-gray-700">
+                <div>
+                  <p className="text-sm text-gray-500">Phone</p>
+                  <p className="font-medium">{user?.phone || "N/A"}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-500">Address</p>
+                  <p className="font-medium">{user?.address || "N/A"}</p>
+                </div>
+
+                {user?.role === "GUIDE" && (
+                  <>
+                    <div>
+                      <p className="text-sm text-gray-500">Price / Hour</p>
+                      <p className="font-medium">{user?.pricePerHour || 0} $</p>
+                    </div>
+
+                    <div>
+                      <p className="text-sm text-gray-500 ">Languages</p>
+                      <p className="font-medium uppercase">
+                        {user?.languages?.length
+                          ? user.languages.join(", ")
+                          : "None"}
+                      </p>
+                      <p className="text-sm text-gray-500 ">
+                        Gender: {user.gender || "N/A"}
+                      </p>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <p className="text-sm text-gray-500">Bio</p>
+                      <p className="font-medium">{user?.bio || "N/A"}</p>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <div className="mt-8 flex justify-end">
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+                >
+                  Edit Profile
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* ===== Edit Mode ===== */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Name */}
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Name
+                  </label>
+                  <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Email
+                  </label>
+                  <input
+                    value={user?.email}
+                    readOnly
+                    className="w-full border rounded-xl p-3 bg-gray-100"
+                  />
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Role
+                  </label>
+                  <input
+                    value={user?.role}
+                    readOnly
+                    className="w-full border rounded-xl p-3 bg-gray-100"
+                  />
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Phone
+                  </label>
+                  <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Gender
+                  </label>
+                  <input
+                    name="gender"
+                    placeholder="Male/Female"
+                    value={form.gender}
+                    onChange={handleChange}
+                    className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Address
+                  </label>
+                  <input
+                    name="address"
+                    value={form.address}
+                    onChange={handleChange}
+                    className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+
+                {/* Guide Fields */}
+                {user?.role === "GUIDE" && (
+                  <>
+                    <div>
+                      <label className="text-sm text-gray-600 mb-1 block">
+                        Price Per Hour ($)
+                      </label>
+                      <input
+                        name="pricePerHour"
+                        type="number"
+                        value={form.pricePerHour}
+                        onChange={handleChange}
+                        className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-sm text-gray-600 mb-1 block">
+                        Languages
+                      </label>
+                      <input
+                        name="languages"
+                        value={form.languages}
+                        onChange={handleChange}
+                        placeholder="English, Bangla, Hindi"
+                        className="w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                      />
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="text-sm text-gray-600 mb-1 block">
+                        Bio
+                      </label>
+                      <textarea
+                        name="bio"
+                        value={form.bio}
+                        onChange={handleChange}
+                        rows={3}
+                        maxLength={120}
+                        className="w-full border rounded-xl p-3 resize-none focus:ring-2 focus:ring-blue-500 outline-none"
+                      />
+                      <p className="text-xs text-gray-400 mt-1">
+                        Max 120 characters
+                      </p>
+                    </div>
+                  </>
+                )}
+
+                {/* Profile Image */}
+                <div className="md:col-span-2">
+                  <label className="text-sm text-gray-600 mb-1 block">
+                    Profile Picture
+                  </label>
+                  <input
+                    type="file"
+                    onChange={(e: any) => setFile(e.target.files[0])}
+                    className="w-full border rounded-xl p-2"
+                  />
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="mt-8 flex justify-end gap-4">
+                <button
+                  onClick={handleUpdate}
+                  disabled={loading}
+                  className="px-8 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition"
+                >
+                  {loading ? "Updating..." : "Save Changes"}
+                </button>
+
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="px-8 py-3 rounded-full bg-gray-500 hover:bg-gray-600 text-white transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

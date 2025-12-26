@@ -10,22 +10,24 @@ import { LogOut } from "lucide-react";
 import handleLogout from "@/helpers/handleLogout";
 
 const Navbar = () => {
-  const session = useSession();
+  // const session = useSession();
+  const { status } = useSession();
+
   return (
-    <nav className="fixed top-6 inset-x-4 h-16 max-w-screen-xl mx-auto rounded-full bg-background border dark:border-slate-700/70 z-30">
+    <nav className="fixed top-6 inset-x-4 h-16 max-w-7xl mx-auto rounded-full bg-background border dark:border-slate-700/70 z-30">
       <div className="flex h-full items-center justify-between px-6 md:px-8">
-        {/* Logo with consistent padding */}
-        <Link href="/" className="flex-shrink-0 text-4xl font-bold ">
+        <Link href="/" className="shrink-0 text-4xl font-bold ">
           GuideHub
         </Link>
 
-        {/* Desktop Menu with consistent horizontal spacing */}
         <NavMenu className="hidden md:block" />
 
-        {/* Actions and Mobile Menu */}
         <div className="flex items-center gap-4 md:gap-6">
           <div className="p-4 border-t border-gray-500">
-            {session.status === "authenticated" ? (
+            {status === "loading" ? (
+              // prevent flicker: render nothing or a skeleton
+              <div className="w-24 h-9 rounded-full bg-muted animate-pulse" />
+            ) : status === "authenticated" ? (
               <Button
                 variant="destructive"
                 className="w-full justify-start gap-2 cursor-pointer"
@@ -43,7 +45,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu */}
           <div className="md:hidden">
             <NavigationSheet />
           </div>
