@@ -1,43 +1,22 @@
+// app/dashboard/page.tsx
 import { getUserSession } from "@/helpers/getUserSession";
+import { redirect } from "next/navigation";
 
 export default async function DashboardHome() {
   const session = await getUserSession();
-  const role = session?.user?.role;
 
-  return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold">Welcome, {session?.user?.name}!</h1>
-      <p className="text-gray-600">{session?.user?.email}</p>
+  if (!session) {
+    // If not logged in, redirect to login page
+    redirect("/login");
+  }
 
-      <div className="mt-6 p-6 bg-white rounded-xl shadow-md">
-        {role === "ADMIN" && <AdminDashboard />}
-        {role === "GUIDE" && <GuideDashboard />}
-        {role === "TOURIST" && <TouristDashboard />}
-      </div>
-    </div>
-  );
-}
+  const role = session.user.role;
 
-function AdminDashboard() {
-  return (
-    <p className="text-lg text-blue-600 font-semibold">
-      Admin Panel: Manage users, bookings, and guides.
-    </p>
-  );
-}
+  // Redirect based on role
+  if (role === "ADMIN") redirect("/dashboard/admin/admin-dashboard");
+  if (role === "GUIDE") redirect("/dashboard/guide/guide-dashboard");
+  if (role === "TOURIST") redirect("/dashboard/tourist/tourist-dashboard");
 
-function GuideDashboard() {
-  return (
-    <p className="text-lg text-green-600 font-semibold">
-      Guide Panel: Manage tours & schedules.
-    </p>
-  );
-}
-
-function TouristDashboard() {
-  return (
-    <p className="text-lg text-purple-600 font-semibold">
-      Tourist Panel: View tours & book guides.
-    </p>
-  );
+  // Optional fallback
+  return <div>Redirecting...</div>;
 }

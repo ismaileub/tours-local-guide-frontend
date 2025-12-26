@@ -142,7 +142,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                 )}
                 {booking.status === "COMPLETED" && (
                   <div className="flex flex-col gap-1">
-                    <span className="px-2 py-1 text-xs rounded bg-red-200 text-red-800">
+                    <span className="px-2 py-1 text-xs rounded bg-green-200 text-red-800">
                       COMPLETED
                     </span>
                     <span className="text-[11px] text-red-600">

@@ -13,6 +13,7 @@ import {
   User,
   CalendarCheck,
   Clock,
+  DollarSign,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
@@ -24,6 +25,11 @@ export default function Sidebar() {
   const menuItems: Record<string, any[]> = {
     ADMIN: [
       { label: "Home", href: "/", icon: Home },
+      {
+        label: "Admin Dashboard",
+        href: "/dashboard/admin/admin-dashboard",
+        icon: Home,
+      },
       {
         label: "Create Blog",
         href: "/dashboard/create-blog",
@@ -40,7 +46,12 @@ export default function Sidebar() {
 
     GUIDE: [
       { label: "Home", href: "/", icon: Home },
-      { label: "My Listings", href: "/dashboard/guide/tours", icon: Map },
+      {
+        label: "Guide Dashboard",
+        href: "/dashboard/guide/guide-dashboard",
+        icon: Home,
+      },
+      { label: "My Tours", href: "/dashboard/guide/tours", icon: Map },
       {
         label: "Schedule",
         href: "/dashboard/guide/schedule",
@@ -51,16 +62,31 @@ export default function Sidebar() {
         href: "/dashboard/guide/pending-request",
         icon: Clock,
       },
+      {
+        label: "My Payment",
+        href: "/dashboard/guide/guide-payment",
+        icon: DollarSign,
+      },
       { label: "My Profile", href: "/dashboard/profile", icon: User },
     ],
 
     TOURIST: [
       { label: "Home", href: "/", icon: Home },
+      {
+        label: "Tourist Dashboard",
+        href: "/dashboard/tourist/tourist-dashboard",
+        icon: Home,
+      },
 
       {
         label: "My Bookings",
         href: "/dashboard/tourist/bookings",
         icon: Calendar,
+      },
+      {
+        label: "Make Payment",
+        href: "/dashboard/tourist/tourist-payment",
+        icon: DollarSign,
       },
       { label: "My Profile", href: "/dashboard/profile", icon: User },
     ],

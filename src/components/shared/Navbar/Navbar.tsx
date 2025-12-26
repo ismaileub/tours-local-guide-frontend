@@ -12,6 +12,8 @@ import handleLogout from "@/helpers/handleLogout";
 const Navbar = () => {
   // const session = useSession();
   const { status } = useSession();
+  // console.log({ status });
+  // console.log({ session });
 
   return (
     <nav className="fixed top-6 inset-x-4 h-16 max-w-7xl mx-auto rounded-full bg-background border dark:border-slate-700/70 z-30">

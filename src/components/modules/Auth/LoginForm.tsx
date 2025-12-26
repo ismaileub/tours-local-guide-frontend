@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { login } from "@/actions/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -34,26 +34,55 @@ export default function LoginForm() {
     },
   });
 
+  // const onSubmit = async (values: FieldValues) => {
+  //   try {
+  //     const res = await signIn("credentials", {
+  //       redirect: false,
+  //       ...values,
+  //     });
+  //     console.log(res);
+
+  //     if (!res?.ok) {
+  //       toast.error("Email or password wrong");
+  //       return;
+  //     }
+
+  //     toast.success("User Logged in successfully");
+  //     router.push("/dashboard");
+  //   } catch (err: any) {
+  //     toast.error("Something went wrong");
+  //   }
+  // };
+
   const onSubmit = async (values: FieldValues) => {
     try {
       const res = await signIn("credentials", {
         redirect: false,
         ...values,
       });
-      console.log(res);
 
       if (!res?.ok) {
         toast.error("Email or password wrong");
         return;
       }
 
-      toast.success("User Logged in successfully");
-      router.push("/dashboard");
+      // Fetch session to get the user role
+      const session = await getSession();
+      const role = session?.user?.role;
+
+      // Decide dashboard link based on role
+      let dashboardLink = "/login"; // fallback
+      if (role === "ADMIN") dashboardLink = "/dashboard/admin/admin-dashboard";
+      if (role === "GUIDE") dashboardLink = "/dashboard/guide/guide-dashboard";
+      if (role === "TOURIST")
+        dashboardLink = "/dashboard/tourist/tourist-dashboard";
+
+      toast.success("User logged in successfully");
+      router.push(dashboardLink); // navigate to correct dashboard
     } catch (err: any) {
       toast.error("Something went wrong");
     }
   };
-
   const handleSocialLogin = (provider: "google" | "github") => {
     console.log(`Login with ${provider}`);
   };

@@ -1,0 +1,101 @@
+[
+  {
+    "guide": { "$oid": "694d6802fb0e94c21235b08c" },
+    "title": "Dhaka City Exploration",
+    "location": "Dhaka, Bangladesh",
+    "price": 30,
+    "duration": "6 hours",
+    "description": "Discover the hustle and bustle of Dhaka city with a local guide.",
+    "coverPhoto": "https://i.ibb.co.com/TqvWjBx3/Dhaka-City-Exploration.jpg",
+    "spots": ["Lalbagh Fort", "Ahsan Manzil", "Sadarghat Riverfront"],
+    "tourType": "City Life"
+  },
+  {
+    "guide": { "$oid": "694d6826fb0e94c21235b091" },
+    "title": "Village Life Experience",
+    "location": "Paharpur, Bangladesh",
+    "price": 40,
+    "duration": "5 hours",
+    "description": "Experience authentic village life and traditional culture.",
+    "coverPhoto": "https://i.ibb.co.com/G3xKd8sB/Village-Life-Experience.jpg",
+    "spots": ["Local Farm", "Pottery Workshop", "Village Market"],
+    "tourType": "Village Life"
+  },
+  {
+    "guide": { "$oid": "694d6836fb0e94c21235b094" },
+    "title": "Sylhet Hill Tracks Adventure",
+    "location": "Sylhet, Bangladesh",
+    "price": 60,
+    "duration": "7 hours",
+    "description": "Trek through the beautiful hills of Sylhet and enjoy nature.",
+    "coverPhoto": "https://i.ibb.co.com/gZcqvkyH/Sylhet-Hill-Tracks-Adventure.jpg",
+    "spots": ["Jaflong", "Tea Gardens", "Lawachara National Park"],
+    "tourType": "Hill Tracks"
+  },
+  {
+    "guide": { "$oid": "694d6862fb0e94c21235b099" },
+    "title": "Chittagong Adventure Trip",
+    "location": "Chittagong, Bangladesh",
+    "price": 80,
+    "duration": "8 hours",
+    "description": "Get your adrenaline pumping with an adventure tour in Chittagong.",
+    "coverPhoto": "https://i.ibb.co.com/N6nfJtDj/Chittagong-Adventure-Trip.jpg",
+    "spots": ["Patenga Beach", "Kaptai Lake", "Foy's Lake"],
+    "tourType": "Adventure"
+  },
+  {
+    "guide": { "$oid": "694d6892fb0e94c21235b09f" },
+    "title": "Historical Dhaka",
+    "location": "Dhaka, Bangladesh",
+    "price": 35,
+    "duration": "5 hours",
+    "description": "Explore Dhaka’s rich history and architectural heritage.",
+    "coverPhoto": "https://i.ibb.co.com/xqkgJtpk/Historical-Dhaka.jpg",
+    "spots": ["Lalbagh Fort", "Ahsan Manzil", "National Museum"],
+    "tourType": "Historical Place"
+  },
+  {
+    "guide": { "$oid": "694cff3e7b47759c54319135" },
+    "title": "Riverside Picnic at Padma",
+    "location": "Rajshahi, Bangladesh",
+    "price": 45,
+    "duration": "6 hours",
+    "description": "Enjoy a calm riverside picnic and boat rides at Padma river.",
+    "coverPhoto": "https://i.ibb.co.com/gFSs0P2N/Riverside-Picnic-at-Padma.jpg",
+    "spots": ["Padma River", "Boat Ride", "Local Market"],
+    "tourType": "River Side"
+  },
+  {
+    "guide": { "$oid": "694cff3e7b47759c54319135" },
+    "title": "Dhaka Nightlife Tour",
+    "location": "Dhaka, Bangladesh",
+    "price": 25,
+    "duration": "4 hours",
+    "description": "Experience Dhaka’s vibrant nightlife with bars, cafes, and music.",
+    "coverPhoto": "https://i.ibb.co.com/rRSTmN91/Dhaka-Nightlife-Tour.jpg",
+    "spots": ["Gulshan Club", "Banani Bars", "Night Markets"],
+    "tourType": "Nightlife"
+  },
+  {
+    "guide": { "$oid": "694cff3e7b47759c54319135" },
+    "title": "Cox's Bazar Adventure Surfing",
+    "location": "Cox's Bazar, Bangladesh",
+    "price": 70,
+    "duration": "5 hours",
+    "description": "Enjoy surfing and water activities at Cox’s Bazar beach.",
+    "coverPhoto": "https://i.ibb.co.com/8gNPw26V/Sunset-at-Cox-s-Bazar.jpg",
+    "spots": ["Laboni Beach", "Surfing School", "Marine Drive"],
+    "tourType": "Adventure"
+  },
+  {
+    "guide": { "$oid": "694cff3e7b47759c54319135" },
+    "title": "Sundarbans Mangrove Tour",
+    "location": "Khulna, Bangladesh",
+    "price": 90,
+    "duration": "10 hours",
+    "description": "Explore the Sundarbans mangrove forest and its wildlife.",
+    "coverPhoto": "https://i.ibb.co.com/4CHfd1z/Sundarbans-Mangrove-Tour.jpg",
+    "spots": ["Sundarbans Forest", "Boat Safari", "Wildlife Spotting"],
+    "tourType": "Adventure"
+  }
+]

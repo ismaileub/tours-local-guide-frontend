@@ -1,0 +1,81 @@
+import PayNowButton from "@/components/PayNowButton";
+import { getUserSession } from "@/helpers/getUserSession";
+
+interface Booking {
+  _id: string;
+  bookingType: "GUIDE_HIRE" | "TOUR_PACKAGE";
+  tourDate: string;
+  totalPrice: number;
+  status: string;
+  paymentStatus: string;
+  guideId?: string;
+  tourId?: string;
+}
+
+const TouristPaymentPage = async () => {
+  const session = await getUserSession();
+  const token = session?.user?.accessToken as string;
+  //console.log(token);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_API}/booking/need-payment`,
+    {
+      method: "GET",
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+
+  const data = await res.json();
+  const bookings = data.data;
+  console.log(bookings);
+
+  if (!bookings.length)
+    return <p className="text-gray-500">No pending payments 🎉</p>;
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 space-y-6">
+      <h1 className="text-3xl font-bold">Pending Payments</h1>
+
+      {bookings.map((booking: Booking) => (
+        <div
+          key={booking._id}
+          className="border rounded-xl p-5 flex justify-between items-center"
+        >
+          <div className="space-y-1">
+            <p className="font-semibold text-blue-600">
+              {booking.bookingType === "GUIDE_HIRE"
+                ? "Guide Hire"
+                : "Tour Package"}
+            </p>
+
+            <p className="text-sm text-gray-500">
+              Date: {new Date(booking.tourDate).toDateString()}
+            </p>
+
+            <p className="text-sm">
+              Status:{" "}
+              <span className="font-medium text-green-600">
+                {booking.status}
+              </span>
+            </p>
+
+            <p className="text-sm">
+              Payment:{" "}
+              <span className="font-medium text-red-500">
+                {booking.paymentStatus}
+              </span>
+            </p>
+
+            <p className="font-bold text-lg">$ {booking.totalPrice}</p>
+          </div>
+
+          <PayNowButton bookingId={booking._id} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default TouristPaymentPage;

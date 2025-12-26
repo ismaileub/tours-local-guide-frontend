@@ -24,7 +24,7 @@ const TopToursSection = () => {
     const fetchTours = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/tours?limit=6&page=1"
+          "http://localhost:5000/api/tours?limit=3&page=1"
         );
         const data = await res.json();
         setTours(data.data || []);

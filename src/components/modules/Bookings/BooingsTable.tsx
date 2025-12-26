@@ -20,7 +20,7 @@ import {
 import Pagination from "@/components/ui/pagination";
 import { toast } from "sonner";
 
-const PendingBookingsTable = ({ token }: { token?: string }) => {
+const BookingsTable = ({ token }: { token?: string }) => {
   const [bookings, setBookings] = useState<any[]>([]);
   const [meta, setMeta] = useState<any>({});
   const [loading, setLoading] = useState(true);
@@ -29,8 +29,8 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
   const getCancelledText = (booking: any) => {
     if (booking.status !== "CANCELLED") return null;
     const last = booking.statusHistory?.at(-1);
-    if (last?.role === "GUIDE") return "Cancelled by you";
-    if (last?.role === "TOURIST") return "Cancelled by tourist";
+    if (last?.role === "GUIDE") return "Cancelled by guide";
+    if (last?.role === "TOURIST") return "Cancelled by you";
     return "Cancelled";
   };
 
@@ -38,7 +38,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API}/booking/pending?page=${page}&limit=10`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/booking?page=${page}&limit=6`,
         {
           headers: { Authorization: token || "" },
           cache: "no-store",
@@ -88,7 +88,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
   return (
     <div className="mt-8 border rounded-lg shadow">
       <h1 className="text-xl font-semibold text-center p-4">
-        Pending Bookings ({meta?.total || bookings?.length})
+        Your Bookings ({meta?.total || bookings?.length})
       </h1>
 
       <Table>
@@ -140,6 +140,21 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                     PENDING
                   </span>
                 )}
+                {booking.status === "CONFIRMED" && (
+                  <span className="px-2 py-1 text-xs rounded bg-yellow-200 text-yellow-800">
+                    CONFIRMED
+                  </span>
+                )}
+                {booking.status === "COMPLETED" && (
+                  <div className="flex flex-col gap-1">
+                    <span className="px-2 py-1 text-xs rounded bg-green-200 text-red-800">
+                      COMPLETED
+                    </span>
+                    <span className="text-[11px] text-red-600">
+                      {getCancelledText(booking)}
+                    </span>
+                  </div>
+                )}
                 {booking.status === "CANCELLED" && (
                   <div className="flex flex-col gap-1">
                     <span className="px-2 py-1 text-xs rounded bg-red-200 text-red-800">
@@ -163,7 +178,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                       <SelectValue placeholder="Select action" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="CONFIRMED">Confirm</SelectItem>
+                      {/* <SelectItem value="CONFIRMED">Confirm</SelectItem> */}
                       <SelectItem value="CANCELLED">Cancel</SelectItem>
                     </SelectContent>
                   </Select>
@@ -187,4 +202,4 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
   );
 };
 
-export default PendingBookingsTable;
+export default BookingsTable;

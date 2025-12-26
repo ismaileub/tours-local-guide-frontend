@@ -157,7 +157,8 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
               {guide.gender || "N/A"}
             </p>
             <p className="mt-1 font-semibold text-gray-800">
-              Price: $ {guide.pricePerHour}/hr
+              Price:{" "}
+              <span className="text-red-600">${guide.pricePerHour}/hr</span>
             </p>
           </div>
         </div>

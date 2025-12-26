@@ -30,7 +30,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
   const [open, setOpen] = useState(false);
   const [tourDate, setTourDate] = useState("");
   const [loading, setLoading] = useState(false);
-  const [reviews, setReviews] = useState(tour.reviews || []);
+  const [reviews, setReviews] = useState(tour?.reviews || []);
   const [bookingId, setBookingId] = useState<string | null>(null);
   const [checkingReview, setCheckingReview] = useState(true);
 
@@ -94,7 +94,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
   }, [token, tour._id]);
 
   return (
-    <div className="space-y-10 mt-30">
+    <div className="space-y-10 mt-20">
       <div className="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-md">
         <p className="font-semibold text-lg">
           Book this tour and get the guide for{" "}
@@ -148,36 +148,44 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
         </div>
 
         {/* RIGHT: Guide Info */}
-        <div className="p-6 border rounded-xl shadow-md space-y-4">
-          <ClientOnly>
-            <Image
-              src={tour.guide.picture || "/avatar.jpg"}
-              alt={tour.guide.name}
-              width={120}
-              height={120}
-              className="rounded-full mx-auto"
-            />
-          </ClientOnly>
-          <div className="text-center">
-            <h3 className="font-bold text-lg">{tour.guide.name}</h3>
-            <p className="text-sm text-gray-500">{tour.guide.bio}</p>
-          </div>
+        <div>
+          <div className="p-6 border rounded-xl shadow-md space-y-4 relative">
+            {/* Top label */}
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow">
+              Guide of this tour
+            </div>
 
-          <div className="flex justify-center gap-1 text-orange-400">
-            {Array.from({ length: 5 }, (_, i) => (
-              <span key={i}>{i < tour.avgRating ? "★" : "☆"}</span>
-            ))}
-          </div>
-          <p className="text-center text-sm text-gray-500">
-            {tour.totalReviews} Reviews
-          </p>
+            <ClientOnly>
+              <Image
+                src={tour.guide.picture || "/avatar.jpg"}
+                alt={tour.guide.name}
+                width={120}
+                height={120}
+                className="rounded-full mx-auto"
+              />
+            </ClientOnly>
 
-          <Button
-            onClick={() => setOpen(true)}
-            className="w-full bg-blue-500 hover:bg-blue-600"
-          >
-            Book This Tour
-          </Button>
+            <div className="text-center">
+              <h3 className="font-bold text-lg">{tour.guide.name}</h3>
+              <p className="text-sm text-gray-500">{tour.guide.bio}</p>
+            </div>
+
+            <div className="flex justify-center gap-1 text-orange-400">
+              {Array.from({ length: 5 }, (_, i) => (
+                <span key={i}>{i < tour.avgRating ? "★" : "☆"}</span>
+              ))}
+            </div>
+            <p className="text-center text-sm text-gray-500">
+              {tour.totalReviews} Reviews
+            </p>
+
+            <Button
+              onClick={() => setOpen(true)}
+              className="w-full bg-blue-500 hover:bg-blue-600"
+            >
+              Book This Tour
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -227,31 +235,38 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
         </h3>
 
         <div className="space-y-4">
-          {reviews.map((review: any) => (
-            <div key={review._id} className="flex gap-4 p-4 border rounded-lg">
-              <ClientOnly>
-                <Image
-                  src={review.reviewer.picture || "/avatar.jpg"}
-                  alt={review.reviewer.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full w-20 h-20"
-                />
-              </ClientOnly>
-              <div>
-                <p className="font-semibold">{review.reviewer.name}</p>
-                <p className="text-xs text-gray-500">
-                  {new Date(review.createdAt).toLocaleDateString()}
-                </p>
-                <p className="mt-1">{review.comment}</p>
-                <div className="flex gap-1 text-orange-400">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <span key={i}>{i < review.rating ? "★" : "☆"}</span>
-                  ))}
+          {reviews && reviews.length > 0 ? (
+            reviews.map((review: any) => (
+              <div
+                key={review._id}
+                className="flex gap-4 p-4 border rounded-lg"
+              >
+                <ClientOnly>
+                  <Image
+                    src={review.reviewer.picture || "/avatar.jpg"}
+                    alt={review.reviewer.name}
+                    width={48}
+                    height={48}
+                    className="rounded-full w-20 h-20"
+                  />
+                </ClientOnly>
+                <div>
+                  <p className="font-semibold">{review.reviewer.name}</p>
+                  <p className="text-xs text-gray-500">
+                    {new Date(review.createdAt).toLocaleDateString()}
+                  </p>
+                  <p className="mt-1">{review.comment}</p>
+                  <div className="flex gap-1 text-orange-400">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span key={i}>{i < review.rating ? "★" : "☆"}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center text-gray-500 italic">No reviews yet</p>
+          )}
         </div>
       </div>
     </div>

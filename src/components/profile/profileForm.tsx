@@ -83,7 +83,7 @@ export default function ProfileForm({ user, token }: any) {
     <div className="max-w-5xl mx-auto mt-12 px-4">
       <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
         {/* ===== Header ===== */}
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white">
+        <div className="bg-linear-to-r from-blue-600 to-indigo-600 p-8 text-white">
           <div className="flex flex-col sm:flex-row items-center gap-6">
             {/* Avatar */}
             <div className="relative w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-white">
@@ -119,8 +119,16 @@ export default function ProfileForm({ user, token }: any) {
               {/* ===== View Mode ===== */}
               <div className="grid sm:grid-cols-2 gap-6 text-gray-700">
                 <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="font-medium">{user?.phone || "N/A"}</p>
+                  <p className="text-sm text-gray-500 ">
+                    Gender:{" "}
+                    <span className="text-black font-medium">
+                      {user.gender || "N/A"}
+                    </span>
+                  </p>
+                  <div>
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="font-medium">{user?.phone || "N/A"}</p>
+                  </div>
                 </div>
 
                 <div>
@@ -141,9 +149,6 @@ export default function ProfileForm({ user, token }: any) {
                         {user?.languages?.length
                           ? user.languages.join(", ")
                           : "None"}
-                      </p>
-                      <p className="text-sm text-gray-500 ">
-                        Gender: {user.gender || "N/A"}
                       </p>
                     </div>
 
