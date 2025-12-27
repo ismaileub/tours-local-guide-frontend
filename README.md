@@ -1,36 +1,224 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tourist Guide Frontend
 
-## Getting Started
+This is the **frontend application** for the Tourist Guide project. It is built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Shadcn UI**. This app allows tourists to view tours, book guides, and make payments using integrated payment systems.
 
-First, run the development server:
+**Live Demo:** [https://tourist-guide-frontend.vercel.app](https://tour-guide-frontend-amber.vercel.app/)
+
+---
+
+## 🛠 Features
+
+- View all tours with details (cover image, price, duration, etc.)
+- Book individual guides or tour packages
+- Secure payment integration (Stripe / other payment gateway)
+- User authentication (login/signup)
+- Review system for tours and guides
+- Responsive UI with Tailwind CSS
+- Safe image loading from Cloudinary & ImgBB with fallback handling
+
+---
+
+## ⚡ Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) >= 18
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/) (optional, for cloning the repository)
+
+---
+
+## 🔧 Setup Instructions (Local Development)
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/your-username/tourist-guide-frontend.git
+cd tourist-guide-frontend
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. **Set up environment variables**
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_BASE_API=https://your-backend-api.com
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY=pk_test_yourkey
+AUTH_SECRET=rtfgdgdfg
+```
+
+> Replace these values with your actual backend URL and Stripe key.
+
+4. **Next.js configuration for remote images**
+
+Edit `next.config.js` to allow images from Cloudinary and ImgBB:
+
+```ts
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "i.ibb.co" },
+    ],
+  },
+};
+
+export default nextConfig;
+```
+
+5. **Run the development server**
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 Safe Image Handling
 
-## Learn More
+Use a `SafeImage` component to prevent 400 errors for broken or malformed URLs:
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import Image from "next/image";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+interface SafeImageProps {
+  src?: string;
+  alt?: string;
+  className?: string;
+}
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+export const SafeImage: React.FC<SafeImageProps> = ({
+  src,
+  alt,
+  className,
+}) => {
+  return (
+    <Image
+      src={src?.replace(".co.com", ".co") || "/tour-placeholder.jpg"} // auto-fix common ImgBB mistake
+      alt={alt || "Tour Image"}
+      fill
+      className={className || "object-cover"}
+      onError={(e) => {
+        (e.target as HTMLImageElement).src = "/tour-placeholder.jpg";
+      }}
+    />
+  );
+};
+```
 
-## Deploy on Vercel
+Usage:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+<SafeImage src={tour.coverPhoto} alt={tour.title} />
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Automatically fixes `.co.com` → `.co` errors
+- Uses fallback image if the URL is broken
+- Works with Cloudinary and ImgBB
+
+---
+
+## 📦 Build & Production
+
+To create a production build:
+
+```bash
+npm run build
+npm start
+# or
+yarn build
+yarn start
+```
+
+- App runs on [http://localhost:3000](http://localhost:3000) by default
+- Make sure your backend API is deployed and reachable
+- Do not use `localhost` URLs for images in production
+- **Live Demo:** [https://tourist-guide-frontend.vercel.app](https://tourist-guide-frontend.vercel.app)
+
+---
+
+## 🔗 Folder Structure
+
+```
+frontend/
+│
+├─ public/                  # Static assets (images, icons, etc.)
+├─ src/
+│   ├─ app/                 # Next.js pages and layouts
+│   ├─ components/          # Shared React components
+│   ├─ context/             # React contexts
+│   ├─ hooks/               # Custom hooks
+│   ├─ services/            # API service functions
+│   ├─ utils/               # Helper functions
+│   └─ styles/              # Tailwind or custom CSS
+├─ .env.local               # Local environment variables
+├─ next.config.js           # Next.js configuration
+├─ package.json             # Project dependencies & scripts
+└─ README.md                # Project documentation
+```
+
+---
+
+## 📝 Useful Scripts
+
+| Command          | Description                 |
+| ---------------- | --------------------------- |
+| `npm run dev`    | Run app in development mode |
+| `npm run build`  | Build production version    |
+| `npm start`      | Start production server     |
+| `npm run lint`   | Lint the code               |
+| `npm run format` | Format code using Prettier  |
+
+---
+
+## ⚠️ Common Issues
+
+1. **400 error on images**
+
+   - Ensure URLs are correct (no `.co.com` typo)
+   - Add image domains in `next.config.js`
+   - Use `SafeImage` component to handle broken/malformed URLs
+
+2. **CORS or API errors**
+
+   - Ensure `NEXT_PUBLIC_BASE_API` points to the deployed backend
+   - Avoid `localhost` in production
+
+3. **Stripe errors**
+
+   - Ensure `NEXT_PUBLIC_STRIPE_PUBLIC_KEY` is correct
+   - Check backend handling of payment intents
+
+---
+
+## 📚 References
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [ImgBB API](https://api.imgbb.com/)
+- [Stripe API](https://stripe.com/docs)
+
+---
+
+## 🙌 Author
+
+**Your Name**
+
+- GitHub: [https://github.com/your-username](https://github.com/your-username)
+- Email: [your-email@example.com](mailto:your-email@example.com)
+-
