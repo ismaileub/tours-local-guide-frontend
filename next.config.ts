@@ -5,11 +5,15 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "res.cloudinary.com", // your Cloudinary images
+        hostname: "res.cloudinary.com",
       },
       {
         protocol: "https",
-        hostname: "i.ibb.co.com", // ImgBB images
+        hostname: "i.ibb.co.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.icons8",
       },
     ],
   },

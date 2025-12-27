@@ -69,7 +69,7 @@ const TopGuidesSection = () => {
             <div className="relative w-1/3 h-full">
               <Image
                 sizes="50"
-                src={guide.picture || "/avatar.JPG"}
+                src={guide?.picture || "/avatar.JPG"}
                 alt={guide.name}
                 fill
                 className="object-cover"

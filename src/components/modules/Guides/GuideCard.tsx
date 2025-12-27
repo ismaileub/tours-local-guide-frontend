@@ -27,8 +27,8 @@ const GuideCard = ({ guide }: GuideCardProps) => {
         {/* Left Image */}
         <div className="relative w-1/3 h-full">
           <Image
-            src={guide.picture || "/avatar.JPG"}
-            alt={guide.name}
+            src={guide?.picture || "/avatar.JPG"}
+            alt={guide?.name}
             fill
             className="object-cover"
           />

@@ -105,7 +105,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       <div className="relative w-full h-105 rounded-2xl overflow-hidden">
         <ClientOnly>
           <Image
-            src={tour.coverPhoto}
+            src={tour?.coverPhoto}
             alt={tour.title}
             fill
             className="object-cover"
@@ -157,7 +157,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
 
             <ClientOnly>
               <Image
-                src={tour.guide.picture || "/avatar.jpg"}
+                src={tour?.guide?.picture || "/avatar.jpg"}
                 alt={tour.guide.name}
                 width={120}
                 height={120}
@@ -243,7 +243,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
               >
                 <ClientOnly>
                   <Image
-                    src={review.reviewer.picture || "/avatar.jpg"}
+                    src={review?.reviewer.picture || "/avatar.jpg"}
                     alt={review.reviewer.name}
                     width={48}
                     height={48}

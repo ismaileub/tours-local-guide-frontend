@@ -74,7 +74,7 @@ export default function TourDetailsCard({ tour, token }: Props) {
       {/* Cover Image */}
       <div className="relative w-full h-80">
         <Image
-          src={tour.coverPhoto}
+          src={tour?.coverPhoto}
           alt={tour.title}
           fill
           className="object-cover"

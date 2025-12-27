@@ -109,7 +109,7 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
         <div className="shrink-0">
           <ClientOnly>
             <Image
-              src={guide.picture || "/avatar.jpg"}
+              src={guide?.picture || "/avatar.jpg"}
               width={500}
               height={500}
               alt={guide.name}
@@ -249,12 +249,12 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
           {guide.totalReviews} Reviews
         </h3>
         <div className="space-y-4">
-          {reviews.map((review: any) => (
+          {reviews?.map((review: any) => (
             <div key={review._id} className="flex gap-4 p-4 border rounded-lg">
               <ClientOnly>
                 <Image
-                  src={review.reviewer.picture || "/avatar.jpg"}
-                  alt={review.reviewer.name}
+                  src={review?.reviewer?.picture || "/avatar.jpg"}
+                  alt={review?.reviewer?.name}
                   width={100}
                   height={100}
                   className="w-12 h-12 rounded-full object-cover"
