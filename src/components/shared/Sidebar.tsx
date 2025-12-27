@@ -14,6 +14,7 @@ import {
   CalendarCheck,
   Clock,
   DollarSign,
+  Receipt,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
@@ -30,11 +31,11 @@ export default function Sidebar() {
         href: "/dashboard/admin/admin-dashboard",
         icon: Home,
       },
-      {
-        label: "Create Blog",
-        href: "/dashboard/create-blog",
-        icon: PlusCircle,
-      },
+      // {
+      //   label: "Create Blog",
+      //   href: "/dashboard/create-blog",
+      //   icon: PlusCircle,
+      // },
       { label: "Manage Users", href: "/dashboard/admin/users", icon: Users },
       {
         label: "All Bookings",
@@ -63,7 +64,7 @@ export default function Sidebar() {
         icon: Clock,
       },
       {
-        label: "My Payment",
+        label: "All Payment",
         href: "/dashboard/guide/guide-payment",
         icon: DollarSign,
       },
@@ -84,10 +85,15 @@ export default function Sidebar() {
         icon: Calendar,
       },
       {
-        label: "Make Payment",
+        label: "My Payment",
         href: "/dashboard/tourist/tourist-payment",
         icon: DollarSign,
       },
+      // {
+      //   label: "Payment History",
+      //   href: "/dashboard/tourist/payment-history",
+      //   icon: Receipt,
+      // },
       { label: "My Profile", href: "/dashboard/profile", icon: User },
     ],
   };
