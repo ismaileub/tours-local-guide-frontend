@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Home,
-  PlusCircle,
   LogOut,
   Users,
   Calendar,
@@ -14,7 +13,6 @@ import {
   CalendarCheck,
   Clock,
   DollarSign,
-  Receipt,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 

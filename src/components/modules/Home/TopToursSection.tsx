@@ -24,7 +24,7 @@ const TopToursSection = () => {
     const fetchTours = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/tours?limit=3&page=1"
+          `${process.env.NEXT_PUBLIC_BASE_API}/tours?limit=3&page=1`
         );
         const data = await res.json();
         setTours(data.data || []);
@@ -40,7 +40,9 @@ const TopToursSection = () => {
 
   if (loading)
     return (
-      <p className="text-center py-10 text-lg font-medium">Loading tours...</p>
+      <p className="text-center py-10 text-lg font-medium">
+        Loading tours......
+      </p>
     );
   if (error)
     return (
@@ -63,7 +65,7 @@ const TopToursSection = () => {
 
       {/* Tours Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-        {tours.map((tour) => (
+        {tours?.map((tour) => (
           <TourCard key={tour._id} tour={tour} />
         ))}
       </div>

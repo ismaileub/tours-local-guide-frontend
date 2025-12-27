@@ -50,7 +50,7 @@ const AllToursPage = () => {
       if (tourType) params.append("tourType", tourType);
 
       const res = await fetch(
-        `http://localhost:5000/api/tours?${params.toString()}`
+        `${process.env.NEXT_PUBLIC_BASE_API}/tours?${params.toString()}`
       );
       const data = await res.json();
       console.log(data);

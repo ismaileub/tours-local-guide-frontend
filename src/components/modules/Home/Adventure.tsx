@@ -4,12 +4,8 @@ import { MapPin, CheckCircle, Camera, Users } from "lucide-react";
 const Adventure = () => {
   return (
     <section
-      className="relative w-full bg-black/70 py-20 text-white flex flex-col md:flex-row items-center justify-between px-6 md:px-20"
-      style={{
-        backgroundImage: "url(./adventure.jpg)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative w-full bg-black/70 py-20 text-white flex flex-col md:flex-row items-center justify-between px-6 md:px-20 bg-cover bg-center"
+      style={{ backgroundImage: "url(/adventure.jpg)" }}
     >
       {/* Left content */}
       <div className="md:w-1/2 mb-10 md:mb-0">

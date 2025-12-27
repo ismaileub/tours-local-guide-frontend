@@ -82,7 +82,7 @@ export default function CreateTourForm({ onSuccess, token }: Props) {
         {
           method: "POST",
           body: formData,
-          headers: { authorization: `Bearer ${token}` }, // token included
+          headers: { authorization: token }, // token included
         }
       );
 

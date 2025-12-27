@@ -20,7 +20,7 @@ import {
 import Pagination from "@/components/ui/pagination";
 import { toast } from "sonner";
 
-const BookingsTable = ({ token }: { token?: string }) => {
+const BookingsTableForTourist = ({ token }: { token?: string }) => {
   const [bookings, setBookings] = useState<any[]>([]);
   const [meta, setMeta] = useState<any>({});
   const [loading, setLoading] = useState(true);
@@ -38,17 +38,19 @@ const BookingsTable = ({ token }: { token?: string }) => {
     try {
       setLoading(true);
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API}/booking?page=${page}&limit=6`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/booking/logged-user-booking?page=${page}&limit=6`,
         {
-          headers: { Authorization: token || "" },
+          headers: { authorization: token || "" },
           cache: "no-store",
         }
       );
       const data = await res.json();
+      //console.log(data);
       if (!res.ok) throw new Error(data.message);
       setBookings(data.data);
       setMeta(data.meta);
     } catch (err: any) {
+      //console.log(err);
       toast.error(err.message || "Failed to load bookings");
     } finally {
       setLoading(false);
@@ -82,7 +84,7 @@ const BookingsTable = ({ token }: { token?: string }) => {
   };
 
   if (loading) {
-    return <p className="text-center mt-10">Loading pending bookings...</p>;
+    return <p className="text-center mt-10">Loading your bookings...</p>;
   }
 
   return (
@@ -94,7 +96,7 @@ const BookingsTable = ({ token }: { token?: string }) => {
       <Table>
         <TableHeader className="bg-gray-200">
           <TableRow>
-            <TableHead>Tourist</TableHead>
+            <TableHead>Guide</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Phone</TableHead>
             <TableHead>Booking Type</TableHead>
@@ -107,12 +109,30 @@ const BookingsTable = ({ token }: { token?: string }) => {
         </TableHeader>
 
         <TableBody>
-          {bookings.map((booking) => (
+          {bookings?.map((booking) => (
             <TableRow key={booking._id}>
-              <TableCell>{booking.touristId?.name}</TableCell>
-              <TableCell>{booking.touristId?.email}</TableCell>
-              <TableCell>{booking.touristId?.phone || "N/A"}</TableCell>
-              <TableCell>{booking.bookingType}</TableCell>
+              <TableCell>
+                {booking.bookingType === "GUIDE_HIRE" ? (
+                  <span>{booking?.guideId?.name}</span>
+                ) : booking?.bookingType === "TOUR_PACKAGE" ? (
+                  <span>{booking?.tourId?.guide.name}</span>
+                ) : null}
+              </TableCell>
+              <TableCell>
+                {booking.bookingType === "GUIDE_HIRE" ? (
+                  <span>{booking?.guideId?.email}</span>
+                ) : booking?.bookingType === "TOUR_PACKAGE" ? (
+                  <span>{booking?.tourId?.guide.email}</span>
+                ) : null}
+              </TableCell>
+              <TableCell>
+                {booking.bookingType === "GUIDE_HIRE" ? (
+                  <span>{booking?.guideId?.phone}</span>
+                ) : booking?.bookingType === "TOUR_PACKAGE" ? (
+                  <span>{booking?.tourId?.guide.phone}</span>
+                ) : null}
+              </TableCell>
+              <TableCell>{booking?.bookingType}</TableCell>
               <TableCell>
                 {new Date(booking.tourDate).toLocaleString()}
               </TableCell>
@@ -121,13 +141,13 @@ const BookingsTable = ({ token }: { token?: string }) => {
               <TableCell>
                 {booking.bookingType === "GUIDE_HIRE" ? (
                   <span>
-                    {booking.hours} hrs × ${booking.hourlyRate}
+                    {booking?.hours} hrs × ${booking.hourlyRate}
                   </span>
                 ) : booking.bookingType === "TOUR_PACKAGE" ? (
                   <span>
-                    {booking.tourId?.title || "Tour Info N/A"} <br />
-                    {booking.tourId?.duration} <br />
-                    {booking.tourId?.location}
+                    {booking?.tour?.title || "Tour Info N/A"} <br />
+                    {booking?.tourId?.duration} <br />
+                    {booking?.tourId?.location}
                   </span>
                 ) : null}
               </TableCell>
@@ -202,4 +222,4 @@ const BookingsTable = ({ token }: { token?: string }) => {
   );
 };
 
-export default BookingsTable;
+export default BookingsTableForTourist;

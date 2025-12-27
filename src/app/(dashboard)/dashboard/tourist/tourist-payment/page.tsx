@@ -1,5 +1,7 @@
 import PayNowButton from "@/components/PayNowButton";
+import { Button } from "@/components/ui/button";
 import { getUserSession } from "@/helpers/getUserSession";
+import Link from "next/link";
 
 interface Booking {
   _id: string;
@@ -42,16 +44,17 @@ const TouristPaymentPage = async () => {
   );
 
   const result = await response.json();
+  // console.log(result);
   const paidBookings = result.data || [];
   //console.log(PaidBookings);
-
-  if (!UnPaidBookings.length)
-    return <p className="text-gray-500">No pending payments</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold mb-5">Pending Payments</h1>
+        {UnPaidBookings?.length < 1 && (
+          <p className="text-green-600">No Pending Payment</p>
+        )}
 
         {UnPaidBookings?.map((booking: Booking) => (
           <div
@@ -86,12 +89,19 @@ const TouristPaymentPage = async () => {
               <p className="font-bold text-lg">$ {booking.totalPrice}</p>
             </div>
 
-            <PayNowButton bookingId={booking._id} />
+            <Link
+              href={`/dashboard/tourist/payment-page?bookingId=${booking._id}`}
+            >
+              <Button className="btn cursor-pointer bg-primary">Pay Now</Button>
+            </Link>
           </div>
         ))}
       </div>
       <div>
         <h1 className="text-3xl font-bold mb-5">Paid Payments</h1>
+        {paidBookings?.length < 1 && (
+          <p className="text-green-600">No Pending Payment</p>
+        )}
 
         {paidBookings?.map((booking: Booking) => (
           <div

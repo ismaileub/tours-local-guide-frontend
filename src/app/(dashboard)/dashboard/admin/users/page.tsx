@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Pagination from "@/components/ui/pagination";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -25,6 +26,7 @@ export default function AdminAllUsersPage() {
   const [loading, setLoading] = useState(false);
 
   const { data: session, status } = useSession();
+  const token = session?.user.accessToken as string;
 
   const fetchUsers = async () => {
     if (!session?.user?.accessToken) return;
@@ -34,7 +36,7 @@ export default function AdminAllUsersPage() {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_API}/users/all-users?page=${currentPage}&limit=${ITEMS_PER_PAGE}`,
         {
-          headers: { authorization: session.user.accessToken },
+          headers: { authorization: token },
           cache: "no-store",
         }
       );
@@ -52,30 +54,54 @@ export default function AdminAllUsersPage() {
     if (status === "authenticated") {
       fetchUsers();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, status]);
 
   const handleDelete = async (userId: string) => {
-    if (!confirm("Are you sure you want to delete this user?")) return;
     if (!session?.user?.accessToken) return;
+
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API}/admin/users/${userId}`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/users/${userId}`,
         {
           method: "DELETE",
-          headers: { authorization: `Bearer ${session.user.accessToken}` },
+          headers: {
+            authorization: session.user.accessToken,
+          },
         }
       );
+
       const data = await res.json();
+
       if (data.success) {
-        alert("User deleted successfully!");
-        fetchUsers();
+        await Swal.fire({
+          title: "Deleted!",
+          text: "User has been deleted successfully.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        fetchUsers(); // refresh table
       } else {
-        alert("Failed to delete user!");
+        Swal.fire("Failed!", "User could not be deleted.", "error");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong!");
+      Swal.fire("Error!", "Something went wrong.", "error");
     }
   };
 

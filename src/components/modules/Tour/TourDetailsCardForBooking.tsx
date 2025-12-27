@@ -67,7 +67,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
         toast.success("Tour booked successfully!");
         setOpen(false);
       } else {
-        toast.error(data.message || "Booking failed!");
+        toast.error("Guide can not book a tour");
       }
     } catch {
       toast.error("Something went wrong!");

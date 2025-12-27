@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "res.cloudinary.com", // your Cloudinary images
+      },
+      {
+        protocol: "https",
+        hostname: "i.ibb.co.com", // ImgBB images
       },
     ],
   },

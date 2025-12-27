@@ -24,7 +24,7 @@ const TopGuidesSection = () => {
     const fetchGuides = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/users/get-all-guide?page=1&limit=4"
+          `${process.env.NEXT_PUBLIC_BASE_API}/users/get-all-guide?page=1&limit=4`
         );
         const data = await res.json();
         setGuides(data.data || []);
@@ -68,6 +68,7 @@ const TopGuidesSection = () => {
             {/* Left Image */}
             <div className="relative w-1/3 h-full">
               <Image
+                sizes="50"
                 src={guide.picture || "/avatar.JPG"}
                 alt={guide.name}
                 fill

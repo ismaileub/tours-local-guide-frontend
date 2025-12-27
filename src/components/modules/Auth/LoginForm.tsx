@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import Image from "next/image";
 import { getSession, signIn } from "next-auth/react";
-import { login } from "@/actions/auth";
+// import { login } from "@/actions/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

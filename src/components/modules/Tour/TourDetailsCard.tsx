@@ -101,8 +101,8 @@ export default function TourDetailsCard({ tour, token }: Props) {
               {/* Image Preview (Locked) */}
               <div className="relative w-full h-40 rounded overflow-hidden">
                 <Image
-                  src={tour.coverPhoto}
-                  alt={tour.title}
+                  src={tour?.coverPhoto}
+                  alt={tour?.title}
                   fill
                   className="object-cover"
                 />
@@ -174,17 +174,17 @@ export default function TourDetailsCard({ tour, token }: Props) {
           </Dialog>
         </div>
 
-        <p className="text-gray-600 mt-1">{tour.location}</p>
-        <p className="text-sm text-gray-500">Type: {tour.tourType}</p>
-        <p className="text-lg font-semibold mt-2">$ {tour.price}</p>
-        <p className="text-gray-600">Duration: {tour.duration}</p>
+        <p className="text-gray-600 mt-1">{tour?.location}</p>
+        <p className="text-sm text-gray-500">Type: {tour?.tourType}</p>
+        <p className="text-lg font-semibold mt-2">$ {tour?.price}</p>
+        <p className="text-gray-600">Duration: {tour?.duration}</p>
 
-        <p className="mt-4">{tour.description}</p>
+        <p className="mt-4">{tour?.description}</p>
 
         <div className="mt-4">
           <h2 className="font-semibold">Tour Spots</h2>
           <ul className="list-disc list-inside">
-            {tour.spots.map((spot, i) => (
+            {tour.spots?.map((spot, i) => (
               <li key={i}>{spot}</li>
             ))}
           </ul>

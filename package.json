@@ -15,6 +15,9 @@
     "@radix-ui/react-navigation-menu": "^1.2.14",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.6.0",
+    "axios": "^1.13.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
@@ -26,6 +29,7 @@
     "react-hook-form": "^7.68.0",
     "react-icons": "^5.5.0",
     "sonner": "^2.0.7",
+    "sweetalert2": "^11.26.17",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.1.13"
   },

@@ -42,7 +42,9 @@ const AllGuides = () => {
       }
 
       const res = await fetch(
-        `http://localhost:5000/api/users/get-all-guide?${params.toString()}`
+        `${
+          process.env.NEXT_PUBLIC_BASE_API
+        }/users/get-all-guide?${params.toString()}`
       );
       const data = await res.json();
 

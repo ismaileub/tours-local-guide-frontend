@@ -29,11 +29,15 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
       {/* Image with overlay */}
       <div className="relative w-full h-52 overflow-hidden">
         <Image
-          src={tour.coverPhoto || "/tour-placeholder.jpg"}
-          alt={tour.title}
+          src={tour?.coverPhoto || "/avatar.jpg"}
+          alt={tour?.title || "Tour Image"}
           fill
           className="object-cover group-hover:scale-110 transition-transform duration-500"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "/tour-placeholder.jpg";
+          }}
         />
+
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
         {/* Badges */}

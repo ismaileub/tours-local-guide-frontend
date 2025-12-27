@@ -23,7 +23,7 @@ export default function AdminAllBookings() {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://localhost:5000/api/booking?page=${currentPage}&limit=${ITEMS_PER_PAGE}`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/booking?page=${currentPage}&limit=${ITEMS_PER_PAGE}`,
         {
           cache: "no-store",
           headers: { authorization: token },
@@ -44,6 +44,7 @@ export default function AdminAllBookings() {
     if (status === "authenticated") {
       fetchBookings();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, status]);
 
   if (status === "loading") {
