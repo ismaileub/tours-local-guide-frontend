@@ -243,7 +243,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
               >
                 <ClientOnly>
                   <Image
-                    src={review?.reviewer.picture || "/avatar.jpg"}
+                    src={review?.reviewer?.picture || "/avatar.jpg"}
                     alt={review.reviewer.name}
                     width={48}
                     height={48}
