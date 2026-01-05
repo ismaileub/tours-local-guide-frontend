@@ -95,7 +95,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
     };
 
     checkBooking();
-  }, [token, tour._id]);
+  }, [token, tour?._id]);
 
   return (
     <div className="space-y-10 mt-20">
@@ -110,15 +110,15 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
         <ClientOnly>
           <Image
             src={tour?.coverPhoto}
-            alt={tour.title}
+            alt={tour?.title}
             fill
             className="object-cover"
           />
         </ClientOnly>
         <div className="absolute inset-0 bg-black/40 flex items-end p-6">
           <div>
-            <h1 className="text-3xl font-bold text-white">{tour.title}</h1>
-            <p className="text-gray-200">{tour.location}</p>
+            <h1 className="text-3xl font-bold text-white">{tour?.title}</h1>
+            <p className="text-gray-200">{tour?.location}</p>
           </div>
         </div>
       </div>
@@ -127,17 +127,17 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* LEFT: Tour Details */}
         <div className="md:col-span-2 space-y-4">
-          <p className="text-gray-700">{tour.description}</p>
+          <p className="text-gray-700">{tour?.description}</p>
 
           <div className="grid grid-cols-2 gap-4 text-sm">
             <p>
-              <b>Duration:</b> {tour.duration}
+              <b>Duration:</b> {tour?.duration}
             </p>
             <p>
-              <b>Tour Type:</b> {tour.tourType}
+              <b>Tour Type:</b> {tour?.tourType}
             </p>
             <p>
-              <b>Price:</b> ${tour.price}
+              <b>Price:</b> ${tour?.price}
             </p>
           </div>
 
@@ -162,7 +162,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
             <ClientOnly>
               <Image
                 src={tour?.guide?.picture || "/avatar.jpg"}
-                alt={tour.guide.name}
+                alt={tour?.guide?.name}
                 width={120}
                 height={120}
                 className="rounded-full mx-auto"
@@ -170,17 +170,17 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
             </ClientOnly>
 
             <div className="text-center">
-              <h3 className="font-bold text-lg">{tour.guide.name}</h3>
-              <p className="text-sm text-gray-500">{tour.guide.bio}</p>
+              <h3 className="font-bold text-lg">{tour?.guide?.name}</h3>
+              <p className="text-sm text-gray-500">{tour?.guide?.bio}</p>
             </div>
 
             <div className="flex justify-center gap-1 text-orange-400">
               {Array.from({ length: 5 }, (_, i) => (
-                <span key={i}>{i < tour.avgRating ? "★" : "☆"}</span>
+                <span key={i}>{i < tour?.avgRating ? "★" : "☆"}</span>
               ))}
             </div>
             <p className="text-center text-sm text-gray-500">
-              {tour.totalReviews} Reviews
+              {tour?.totalReviews} Reviews
             </p>
 
             <Button
@@ -197,7 +197,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Book {tour.title}</DialogTitle>
+            <DialogTitle>Book {tour?.title}</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-3">
@@ -223,7 +223,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
 
       <ReviewModal
         targetType="TOUR"
-        targetId={tour._id}
+        targetId={tour?._id}
         token={token!}
         bookingId={bookingId!}
         disabled={!bookingId || checkingReview}
@@ -235,34 +235,34 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       {/* Reviews */}
       <div>
         <h3 className="text-xl font-semibold mb-4">
-          {tour.totalReviews} Reviews
+          {tour?.totalReviews} Reviews
         </h3>
 
         <div className="space-y-4">
-          {reviews && reviews.length > 0 ? (
+          {reviews && reviews?.length > 0 ? (
             reviews.map((review: any) => (
               <div
-                key={review._id}
+                key={review?._id}
                 className="flex gap-4 p-4 border rounded-lg"
               >
                 <ClientOnly>
                   <Image
-                    src={review?.reviewer.picture || "/avatar.jpg"}
-                    alt={review.reviewer.name}
+                    src={review?.reviewer?.picture || "/avatar.jpg"}
+                    alt={review?.reviewer?.name}
                     width={48}
                     height={48}
                     className="rounded-full w-20 h-20"
                   />
                 </ClientOnly>
                 <div>
-                  <p className="font-semibold">{review.reviewer.name}</p>
+                  <p className="font-semibold">{review?.reviewer?.name}</p>
                   <p className="text-xs text-gray-500">
-                    {new Date(review.createdAt).toLocaleDateString()}
+                    {new Date(review?.createdAt).toLocaleDateString()}
                   </p>
-                  <p className="mt-1">{review.comment}</p>
+                  <p className="mt-1">{review?.comment}</p>
                   <div className="flex gap-1 text-orange-400">
                     {Array.from({ length: 5 }, (_, i) => (
-                      <span key={i}>{i < review.rating ? "★" : "☆"}</span>
+                      <span key={i}>{i < review?.rating ? "★" : "☆"}</span>
                     ))}
                   </div>
                 </div>
