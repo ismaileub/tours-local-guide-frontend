@@ -107,7 +107,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
         </TableHeader>
 
         <TableBody>
-          {bookings.map((booking) => (
+          {bookings?.map((booking) => (
             <TableRow key={booking._id}>
               <TableCell>{booking.touristId?.name}</TableCell>
               <TableCell>{booking.touristId?.email}</TableCell>
@@ -119,28 +119,28 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
 
               {/* Dynamic Details Column */}
               <TableCell>
-                {booking.bookingType === "GUIDE_HIRE" ? (
+                {booking?.bookingType === "GUIDE_HIRE" ? (
                   <span>
-                    {booking.hours} hrs × ${booking.hourlyRate}
+                    {booking?.hours} hrs × ${booking?.hourlyRate}
                   </span>
-                ) : booking.bookingType === "TOUR_PACKAGE" ? (
+                ) : booking?.bookingType === "TOUR_PACKAGE" ? (
                   <span>
-                    {booking.tourId?.title || "Tour Info N/A"} <br />
-                    {booking.tourId?.duration} <br />
-                    {booking.tourId?.location}
+                    {booking?.tourId?.title || "Tour Info N/A"} <br />
+                    {booking?.tourId?.duration} <br />
+                    {booking?.tourId?.location}
                   </span>
                 ) : null}
               </TableCell>
 
-              <TableCell>${booking.totalPrice}</TableCell>
+              <TableCell>${booking?.totalPrice}</TableCell>
 
               <TableCell>
-                {booking.status === "PENDING" && (
+                {booking?.status === "PENDING" && (
                   <span className="px-2 py-1 text-xs rounded bg-yellow-200 text-yellow-800">
                     PENDING
                   </span>
                 )}
-                {booking.status === "CANCELLED" && (
+                {booking?.status === "CANCELLED" && (
                   <div className="flex flex-col gap-1">
                     <span className="px-2 py-1 text-xs rounded bg-red-200 text-red-800">
                       CANCELLED
@@ -156,7 +156,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                 {booking.status === "PENDING" ? (
                   <Select
                     onValueChange={(value) =>
-                      handleStatusChange(booking._id, value)
+                      handleStatusChange(booking?._id, value)
                     }
                   >
                     <SelectTrigger className="w-[160px]">

@@ -70,7 +70,7 @@ export default function AdminAllBookings() {
           </thead>
 
           <tbody>
-            {bookings.map((b) => (
+            {bookings?.map((b) => (
               <tr key={b._id} className="border-b hover:bg-gray-50">
                 <td className="px-4 py-3">
                   <p className="font-semibold">{b.tourist.name}</p>

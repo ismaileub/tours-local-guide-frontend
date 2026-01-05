@@ -16,6 +16,7 @@ import Image from "next/image";
 import ReviewModal from "../Review/ReviewModal";
 import { getCompletedBookingId } from "@/helpers/hasCompletedBooking";
 import ClientOnly from "@/components/ClientOnly";
+import { useRouter } from "next/navigation";
 
 interface Review {
   _id: string;
@@ -43,6 +44,8 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
   //const [canReview, setCanReview] = useState(false);
   const [checkingReview, setCheckingReview] = useState(true);
   const [bookingId, setBookingId] = useState<string | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     const checkBooking = async () => {
@@ -91,6 +94,7 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
       if (res.ok) {
         toast.success("Guide booked successfully!");
         setOpen(false);
+        router.push("/dashboard/tourist/bookings");
       } else {
         toast.error(data.message || "Booking failed!");
       }
@@ -261,7 +265,7 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
                 />
               </ClientOnly>
               <div>
-                <p className="font-semibold">{review.reviewer.name}</p>
+                <p className="font-semibold">{review?.reviewer?.name}</p>
                 <p className="text-sm text-gray-500">
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>

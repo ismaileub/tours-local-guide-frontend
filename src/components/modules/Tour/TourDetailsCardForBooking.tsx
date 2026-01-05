@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import ReviewModal from "../Review/ReviewModal";
 import { getCompletedBookingId } from "@/helpers/hasCompletedBooking";
 import ClientOnly from "@/components/ClientOnly";
+import { useRouter } from "next/navigation";
 
 interface TourDetailsCardProps {
   tour: any;
@@ -33,6 +34,8 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
   const [reviews, setReviews] = useState(tour?.reviews || []);
   const [bookingId, setBookingId] = useState<string | null>(null);
   const [checkingReview, setCheckingReview] = useState(true);
+
+  const router = useRouter();
 
   const handleBooking = async () => {
     if (!token) {
@@ -66,6 +69,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       if (res.ok) {
         toast.success("Tour booked successfully!");
         setOpen(false);
+        router.push("/dashboard/tourist/bookings");
       } else {
         toast.error("Guide can not book a tour");
       }

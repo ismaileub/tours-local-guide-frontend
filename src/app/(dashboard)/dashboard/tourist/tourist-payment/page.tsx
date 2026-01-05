@@ -100,7 +100,7 @@ const TouristPaymentPage = async () => {
       <div>
         <h1 className="text-3xl font-bold mb-5">Paid Payments</h1>
         {paidBookings?.length < 1 && (
-          <p className="text-green-600">No Pending Payment</p>
+          <p className="text-green-600">No paid Payment</p>
         )}
 
         {paidBookings?.map((booking: Booking) => (

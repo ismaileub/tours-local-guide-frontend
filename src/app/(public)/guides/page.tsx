@@ -105,12 +105,12 @@ const AllGuides = () => {
 
       {/* Guide Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
-        {guides.map((guide) => (
+        {guides?.map((guide) => (
           <GuideCard key={guide._id} guide={guide} />
         ))}
       </div>
 
-      {guides.length === 0 && (
+      {guides?.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
           No guide available with this language
         </p>
