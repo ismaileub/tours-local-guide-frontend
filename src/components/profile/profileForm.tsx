@@ -127,7 +127,7 @@ export default function ProfileForm({ user, token }: any) {
                   <p className="text-sm text-gray-500 ">
                     Gender:{" "}
                     <span className="text-black font-medium">
-                      {user.gender || "N/A"}
+                      {user?.gender || "N/A"}
                     </span>
                   </p>
                   <div>
