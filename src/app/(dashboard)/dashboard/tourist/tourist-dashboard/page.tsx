@@ -23,7 +23,7 @@ const TouristDashboardPage = async () => {
           color="text-indigo-600"
         />
         <DashboardCard
-          title="Completed Tours"
+          title="Completed Bookings"
           value={data.completedTours}
           color="text-green-600"
         />

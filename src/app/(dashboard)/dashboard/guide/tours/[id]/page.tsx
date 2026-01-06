@@ -10,7 +10,7 @@ interface Props {
 
 const TourDetailsPage = async ({ params }: Props) => {
   const { id } = await params;
-  console.log(id);
+  // console.log(id);
 
   const session = await getUserSession();
   const token = session?.user?.accessToken as string;

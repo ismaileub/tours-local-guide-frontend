@@ -89,7 +89,8 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       }
 
       const id = await getCompletedBookingId(token, tour._id);
-      //console.log(id);
+      console.log("tourid", tour._id);
+      console.log("complete booking", id);
       setBookingId(id);
       setCheckingReview(false);
     };
@@ -109,6 +110,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       <div className="relative w-full h-105 rounded-2xl overflow-hidden">
         <ClientOnly>
           <Image
+            loading="eager"
             src={tour?.coverPhoto}
             alt={tour?.title}
             fill
@@ -240,7 +242,7 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
 
         <div className="space-y-4">
           {reviews && reviews?.length > 0 ? (
-            reviews.map((review: any) => (
+            reviews?.map((review: any) => (
               <div
                 key={review?._id}
                 className="flex gap-4 p-4 border rounded-lg"

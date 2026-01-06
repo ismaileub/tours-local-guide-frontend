@@ -254,7 +254,7 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
 
       <div>
         <h3 className="text-lg font-semibold mb-4">
-          {guide.totalReviews} Reviews
+          {guide?.totalReviews} Reviews
         </h3>
         <div className="space-y-4">
           {reviews?.map((review: any) => (
