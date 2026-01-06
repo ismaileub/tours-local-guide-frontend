@@ -32,6 +32,7 @@ const TourCard: React.FC<TourCardProps> = ({
           fill
           className="object-cover"
           priority
+          sizes="50"
         />
       </div>
       <div className="p-4 flex-1 flex flex-col justify-between">

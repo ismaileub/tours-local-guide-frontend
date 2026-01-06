@@ -30,8 +30,9 @@ export default function AdminAllBookings() {
         }
       );
       const data = await res.json();
+      console.log(data);
       setBookings(data?.data || []);
-      setTotalPages(data?.meta?.totalPages || 1);
+      setTotalPages(data?.meta?.totalPage || 1);
       setTotalItems(data?.meta?.total || 0);
     } catch (error) {
       console.error("Failed to load bookings", error);

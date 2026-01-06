@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "img.icons8",
+        hostname: "img.icons8.com",
       },
     ],
   },

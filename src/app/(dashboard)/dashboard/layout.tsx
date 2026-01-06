@@ -9,17 +9,14 @@ export default async function DashboardLayout({
 }) {
   const session = await getUserSession();
 
-  // If no session, redirect to login
   if (!session) {
     redirect("/login");
   }
 
   return (
     <main className="min-h-screen flex bg-gray-50">
-      <Sidebar /> {/* Sidebar role-based */}
-      <section className="flex-1 p-6">
-        {children} {/* Dashboard Home / Other pages */}
-      </section>
+      <Sidebar />
+      <section className="flex-1 p-6">{children}</section>
     </main>
   );
 }

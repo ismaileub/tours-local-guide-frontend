@@ -95,8 +95,12 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
         toast.success("Guide booked successfully!");
         setOpen(false);
         router.push("/dashboard/tourist/bookings");
+      } else if (data.message?.includes("GUIDE_HIRE")) {
+        toast.error("This guide does not have proper data available for hire.");
+      } else if (data.message?.toLowerCase().includes("not permitted")) {
+        toast.error("This feature is available only for tourists.");
       } else {
-        toast.error(data.message || "Booking failed!");
+        toast.error("Something went wrong!");
       }
     } catch (error: any) {
       toast.error("Something went wrong!");
@@ -269,7 +273,7 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
                 <p className="text-sm text-gray-500">
                   {new Date(review.createdAt).toLocaleDateString()}
                 </p>
-                <p className="mt-1">{review.comment}</p>
+                <p className="mt-1">{review?.comment}</p>
                 <div className="flex gap-1 mt-1 text-orange-400">
                   {Array.from({ length: 5 }, (_, i) => (
                     <span key={i}>{i < review.rating ? "★" : "☆"}</span>

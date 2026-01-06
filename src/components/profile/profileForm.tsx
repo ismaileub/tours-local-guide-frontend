@@ -67,6 +67,9 @@ export default function ProfileForm({ user, token }: any) {
 
       const result = await res.json();
       console.log("Updated User:", result);
+      if (!res.ok) {
+        throw new Error(result?.message || "Profile update failed");
+      }
 
       toast.success("Profile Updated Successfully!");
       setIsEditing(false);
@@ -90,8 +93,10 @@ export default function ProfileForm({ user, token }: any) {
               {preview ? (
                 <Image
                   src={preview}
+                  loading="eager"
                   alt="Profile"
                   fill
+                  sizes="30"
                   className="object-cover"
                 />
               ) : (

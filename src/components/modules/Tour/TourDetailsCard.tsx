@@ -74,10 +74,12 @@ export default function TourDetailsCard({ tour, token }: Props) {
       {/* Cover Image */}
       <div className="relative w-full h-80">
         <Image
+          loading="eager"
           src={tour?.coverPhoto}
           alt={tour.title}
           fill
           className="object-cover"
+          sizes="50"
         />
       </div>
 

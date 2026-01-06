@@ -6,17 +6,14 @@ export default async function DashboardHome() {
   const session = await getUserSession();
 
   if (!session) {
-    // If not logged in, redirect to login page
     redirect("/login");
   }
 
-  const role = session.user.role;
+  const role = session?.user?.role;
 
-  // Redirect based on role
   if (role === "ADMIN") redirect("/dashboard/admin/admin-dashboard");
   if (role === "GUIDE") redirect("/dashboard/guide/guide-dashboard");
   if (role === "TOURIST") redirect("/dashboard/tourist/tourist-dashboard");
 
-  // Optional fallback
   return <div>Redirecting...</div>;
 }
