@@ -220,5 +220,5 @@ frontend/
 **Your Name**
 
 - GitHub: [https://github.com/ismaileub](https://github.com/ismaileub)
-- Email: [ismail301515@gmail.com](ismail301515@gmail.com)
+- Email: ismail301515@gmail.com
 -
