@@ -219,6 +219,6 @@ frontend/
 
 **Your Name**
 
-- GitHub: [https://github.com/your-username](https://github.com/your-username)
-- Email: [your-email@example.com](mailto:your-email@example.com)
+- GitHub: [https://github.com/ismaileub](https://github.com/ismaileub)
+- Email: [ismail301515@gmail.com](ismail301515@gmail.com)
 -
