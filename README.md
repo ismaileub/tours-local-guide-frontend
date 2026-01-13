@@ -1,6 +1,6 @@
 # Tourist Guide Frontend
 
-This is the **frontend application** for the Tourist Guide project. It is built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Shadcn UI**. This app allows tourists to view tours, book guides, and make payments using integrated payment systems.
+This is the **frontend application** for the Tourist Guide project. It is built with **Next.js**, **TypeScript**, **Tailwind CSS**, and **Shadcn UI**. This app allows tourists to view tours, book guides, and make payments using stripe payment systems.
 
 **Live Demo:** [https://tourist-guide-frontend.vercel.app](https://tour-guide-frontend-amber.vercel.app/)
 
