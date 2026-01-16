@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 const Banner = () => {
   return (
     <div>
-      <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-cyan-500 to-green-400">
+      <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-blue-600 via-cyan-500 to-green-400">
         {/* Background shapes */}
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 0.4, scale: 1 }}
           transition={{ duration: 1.8 }}
-          className="absolute w-[600px] h-[600px] bg-white/10 rounded-full blur-3xl"
+          className="absolute w-150 h-150 bg-white/10 rounded-full blur-3xl"
         />
 
         <motion.div

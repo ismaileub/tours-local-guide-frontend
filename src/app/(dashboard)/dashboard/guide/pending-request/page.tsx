@@ -1,4 +1,4 @@
-import PendingBookingsTable from "@/components/modules/Bookings/PandingfBookingTable";
+import PendingBookingsTable from "@/components/modules/Bookings/PandingBookingTable";
 import { getUserSession } from "@/helpers/getUserSession";
 
 const PendingBookingsPage = async () => {

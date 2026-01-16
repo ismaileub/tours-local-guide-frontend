@@ -109,6 +109,8 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
     }
   };
 
+  console.log(guide);
+
   return (
     <div className="space-y-6 mt-40">
       {/* Guide Info */}
@@ -172,10 +174,10 @@ const GuideDetailsCard: React.FC<GuideDetailsProps> = ({ guide, token }) => {
         </div>
 
         {/* Booking Button */}
-        <div className="mt-4 md:mt-0  flex flex-col justify-between items-center space-y-40 ">
+        <div className="mt-4 md:mt-0  flex flex-col justify-between  items-center space-y-40 ">
           <Button
             onClick={() => setOpen(true)}
-            className="bg-blue-400 hover:bg-blue-500 font-bold text-white"
+            className="bg-blue-400 hover:bg-blue-500 font-bold text-white cursor-pointer"
           >
             Hire The Guide
           </Button>

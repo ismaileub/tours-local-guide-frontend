@@ -8,26 +8,22 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { NavigationMenuProps } from "@radix-ui/react-navigation-menu";
-import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 
-interface NavMenuProps extends NavigationMenuProps {
-  session?: Session; // pass session if available
-}
-
-export const NavMenu = ({ ...props }: NavMenuProps) => {
-  const session = useSession();
-  const role = session.data?.user.role;
-  // console.log(session.data?.user.role);
-
-  // console.log({ role });
+export const NavMenu = (props: NavigationMenuProps) => {
+  const { data: session, status } = useSession();
+  const role = session?.user?.role;
 
   // Decide dashboard link based on role
-  let dashboardLink = "/login"; // default fallback
-  if (role === "ADMIN") dashboardLink = "/dashboard/admin/admin-dashboard";
-  if (role === "GUIDE") dashboardLink = "/dashboard/guide/guide-dashboard";
-  if (role === "TOURIST")
+  let dashboardLink: string | null = null;
+
+  if (role === "ADMIN") {
+    dashboardLink = "/dashboard/admin/admin-dashboard";
+  } else if (role === "GUIDE") {
+    dashboardLink = "/dashboard/guide/guide-dashboard";
+  } else if (role === "TOURIST") {
     dashboardLink = "/dashboard/tourist/tourist-dashboard";
+  }
 
   return (
     <NavigationMenu {...props}>
@@ -37,26 +33,33 @@ export const NavMenu = ({ ...props }: NavMenuProps) => {
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link href="#">About</Link>
+            <Link href="/about">About Us</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link href="/tours">Tour</Link>
+            <Link href="/tours">Tours</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
+
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
             <Link href="/guides">Guides</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href={dashboardLink}>Dashboard</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+
+        {/*  Show Dashboard ONLY when logged in */}
+        {status === "authenticated" && dashboardLink && (
+          <NavigationMenuItem>
+            <NavigationMenuLink asChild>
+              <Link href={dashboardLink}>Dashboard</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

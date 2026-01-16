@@ -44,7 +44,10 @@ export default function Footer() {
             >
               Guides
             </Link>
-            <Link href="#" className="hover:text-indigo-400 transition-colors">
+            <Link
+              href="about"
+              className="hover:text-indigo-400 transition-colors"
+            >
               About
             </Link>
             <Link href="#" className="hover:text-indigo-400 transition-colors">
