@@ -38,14 +38,14 @@ const AboutPage = () => {
 
       {/* Story Section */}
       <section className="mb-16 px-4">
-        <div className="rounded-3xl bg-gradient-to-br from-orange-50 via-white to-orange-100 py-16 px-6">
+        <div className="rounded-3xl bg-linear-to-br from-orange-50 via-white to-orange-100 py-16 px-6">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
             Our Story
           </h2>
           <p className="text-gray-700 text-center max-w-3xl mx-auto leading-relaxed">
             Founded with the vision to simplify travel planning, GuideHub brings
             together passionate travelers and knowledgeable local experts. Every
-            journey deserves to be unique, meaningful, and memorable.
+            journey deserves to be unique, meaningful and memorable.
           </p>
         </div>
       </section>

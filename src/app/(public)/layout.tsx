@@ -13,7 +13,10 @@ export default function PublicLayout({
         <Navbar />
       </ClientOnly>
 
-      <main className="min-h-dvh mx-auto">{children}</main>
+      <main className="min-h-dvh mx-auto pt-16 w-full overflow-x-hidden">
+        {children}
+      </main>
+
       <Footer />
     </>
   );

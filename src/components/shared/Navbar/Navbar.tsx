@@ -1,52 +1,91 @@
 "use client";
-import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-
+import { useSession, signOut } from "next-auth/react";
 import { NavMenu } from "./nav-menu";
 import { NavigationSheet } from "./navigation-sheet";
-import { useSession } from "next-auth/react";
-import { LogOut } from "lucide-react";
-import handleLogout from "@/helpers/handleLogout";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
-  // const session = useSession();
-  const { status } = useSession();
-  // console.log({ status });
-  // console.log({ session });
+  const { status, data: session } = useSession();
+  console.log(session);
 
   return (
-    <nav className="fixed top-6 inset-x-4 h-16 max-w-7xl mx-auto rounded-full bg-background border dark:border-slate-700/70 z-30">
-      <div className="flex h-full items-center justify-between px-6 md:px-8">
-        <Link href="/" className="shrink-0 text-4xl font-bold ">
-          GuideHub
+    <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-xl">
+      <div className=" mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="text-2xl md:text-3xl font-extrabold tracking-tight"
+        >
+          Guide<span className="text-orange-500">Hub</span>
         </Link>
 
-        <NavMenu className="hidden md:block" />
+        {/* Desktop menu */}
+        <div className="hidden md:flex">
+          <NavMenu />
+        </div>
 
-        <div className="flex items-center gap-4 md:gap-6">
-          <div className="p-4 border-t border-gray-500">
-            {status === "loading" ? (
-              // prevent flicker: render nothing or a skeleton
-              <div className="w-24 h-9 rounded-full bg-muted animate-pulse" />
-            ) : status === "authenticated" ? (
-              <Button
-                variant="destructive"
-                className="w-full justify-start gap-2 cursor-pointer"
-                onClick={() => handleLogout()}
-              >
-                <LogOut className="h-4 w-4" />
-                Logout
-              </Button>
-            ) : (
-              <Button className="rounded-full px-5 py-2 text-sm md:text-base">
-                <Link href="/login" className="block w-full text-center">
-                  Login
-                </Link>
-              </Button>
-            )}
-          </div>
+        {/* Right side */}
+        <div className="flex items-center gap-4 ">
+          {status === "authenticated" && session?.user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="p-0 cursor-pointer rounded-full"
+                >
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage
+                      src={session?.user?.picture || ""}
+                      alt={session?.user?.name || "User"}
+                    />
+                    <AvatarFallback>
+                      {session.user.name?.[0] || "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {/* User info */}
+                <div className="p-3 border-b">
+                  <p className="text-sm font-semibold">{session.user.name}</p>
+                  <p className="text-xs text-gray-500">{session.user.role}</p>
+                </div>
 
+                {/* Menu links */}
+                <DropdownMenuItem className="cursor-pointer">
+                  <Link href="/dashboard">Dashboard</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">
+                  <Link href="/dashboard/profile">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button
+              asChild
+              className="rounded-full px-6 py-2"
+              variant="default"
+            >
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
+
+          {/* Mobile menu */}
           <div className="md:hidden">
             <NavigationSheet />
           </div>

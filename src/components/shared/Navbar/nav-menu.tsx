@@ -1,66 +1,43 @@
 "use client";
 
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
 import Link from "next/link";
-import { NavigationMenuProps } from "@radix-ui/react-navigation-menu";
-import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-export const NavMenu = (props: NavigationMenuProps) => {
-  const { data: session, status } = useSession();
-  const role = session?.user?.role;
+const links = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Tours", href: "/tours" },
+  { name: "Guides", href: "/guides" },
+  { name: "Contact", href: "/contact" },
+];
 
-  // Decide dashboard link based on role
-  let dashboardLink: string | null = null;
-
-  if (role === "ADMIN") {
-    dashboardLink = "/dashboard/admin/admin-dashboard";
-  } else if (role === "GUIDE") {
-    dashboardLink = "/dashboard/guide/guide-dashboard";
-  } else if (role === "TOURIST") {
-    dashboardLink = "/dashboard/tourist/tourist-dashboard";
-  }
+export const NavMenu = ({ className }: { className?: string }) => {
+  const pathname = usePathname();
 
   return (
-    <NavigationMenu {...props}>
-      <NavigationMenuList className="gap-6 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start font-medium">
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/">Home</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+    <div className={cn("flex items-center gap-8", className)}>
+      {links.map((link) => {
+        const active = pathname === link.href;
 
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/about">About Us</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="relative font-medium text-gray-800 hover:text-orange-500 transition"
+          >
+            {link.name}
 
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/tours">Tours</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild>
-            <Link href="/guides">Guides</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-
-        {/*  Show Dashboard ONLY when logged in */}
-        {status === "authenticated" && dashboardLink && (
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link href={dashboardLink}>Dashboard</Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-        )}
-      </NavigationMenuList>
-    </NavigationMenu>
+            {/* underline animation */}
+            <span
+              className={cn(
+                "absolute -bottom-1 left-0 h-[2px] w-full bg-orange-500 transition-all duration-300",
+                active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+              )}
+            />
+          </Link>
+        );
+      })}
+    </div>
   );
 };

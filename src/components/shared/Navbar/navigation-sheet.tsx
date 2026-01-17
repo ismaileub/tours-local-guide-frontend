@@ -6,16 +6,12 @@ import { NavMenu } from "./nav-menu";
 export const NavigationSheet = () => {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="rounded-full">
-          <Menu />
-        </Button>
+      <SheetTrigger>
+        <Menu />
       </SheetTrigger>
-      <SheetContent>
-        {/* <Logo />
-         */}
-         Logo
-        <NavMenu orientation="vertical" className="mt-12" />
+
+      <SheetContent side="right" className="w-72">
+        {/* links here */}
       </SheetContent>
     </Sheet>
   );

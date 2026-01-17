@@ -7,6 +7,7 @@ import {
   Headphones,
   Map,
   Star,
+  Users,
 } from "lucide-react";
 
 const WhyUs = () => {
@@ -20,7 +21,7 @@ const WhyUs = () => {
         plans, and unforgettable experiences.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-16 px-4 md:px-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10 px-4 md:px-10">
         {/* Card 1 */}
         <motion.div
           whileHover={{ scale: 1.06 }}
@@ -102,18 +103,21 @@ const WhyUs = () => {
         </motion.div>
 
         {/* Card 6 */}
+        {/* Card - Empowering Local Guides */}
         <motion.div
           whileHover={{ scale: 1.06 }}
           className="p-8 rounded-3xl bg-white shadow-lg hover:shadow-2xl transition-all border border-gray-100"
         >
           <div className="flex justify-center mb-5">
-            <Star size={50} className="text-yellow-500" />
+            <Users size={50} className="text-emerald-600" />
           </div>
           <h3 className="text-2xl font-semibold mb-3 text-gray-800">
-            Affordable Pricing
+            Empowering Local Guides
           </h3>
           <p className="text-gray-600">
-            Enjoy the best rates without compromising quality and comfort.
+            We support and empower local guides by providing a trusted platform
+            to share their expertise and create meaningful travel experiences
+            worldwide.
           </p>
         </motion.div>
       </div>
