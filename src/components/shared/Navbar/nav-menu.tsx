@@ -31,7 +31,7 @@ export const NavMenu = ({ className }: { className?: string }) => {
             {/* underline animation */}
             <span
               className={cn(
-                "absolute -bottom-1 left-0 h-[2px] w-full bg-orange-500 transition-all duration-300",
+                "absolute -bottom-1 left-0 h-0.5 w-full bg-orange-500 transition-all duration-300",
                 active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
               )}
             />

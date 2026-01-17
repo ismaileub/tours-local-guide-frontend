@@ -21,12 +21,24 @@ const TopGuidesSection = () => {
   const [guides, setGuides] = useState<Guide[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 640); // Tailwind sm breakpoint
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   useEffect(() => {
     const fetchGuides = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_API}/users/get-all-guide?page=1&limit=6`
+          `${process.env.NEXT_PUBLIC_BASE_API}/users/get-all-guide?page=1&limit=6`,
         );
         const data = await res.json();
         setGuides(data.data || []);
@@ -44,8 +56,8 @@ const TopGuidesSection = () => {
   if (loading) {
     return (
       <section>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 pt-6">
-          {Array.from({ length: 6 }).map((_, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6">
+          {Array.from({ length: isMobile ? 3 : 6 }).map((_, i) => (
             <GuideCardSkeleton key={i} />
           ))}
         </div>
@@ -61,11 +73,13 @@ const TopGuidesSection = () => {
     );
   }
 
+  const displayedGuides = isMobile ? guides.slice(0, 3) : guides;
+
   return (
     <section>
       <div className="mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
-          {guides?.map((guide) => (
+          {displayedGuides.map((guide) => (
             <GuideCard key={guide._id} guide={guide} />
           ))}
         </div>

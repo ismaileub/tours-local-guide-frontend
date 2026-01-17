@@ -22,24 +22,23 @@ const GuideCard = ({ guide }: GuideCardProps) => {
     <Link
       href={`/guides/${guide._id}`}
       className="
-        group flex bg-white rounded-lg shadow
+        group bg-white rounded-lg shadow
         hover:shadow-xl hover:-translate-y-1
         transition-all duration-300
-        overflow-hidden h-48
+        overflow-hidden
+        flex flex-col md:flex-row
       "
     >
-      {/* Image Section */}
-      <div className="relative w-1/3 h-full">
+      {/* Image */}
+      <div className="relative w-full md:w-1/3 h-52 md:h-auto">
         <Image
           src={guide.picture || "/avatar.JPG"}
           alt={guide.name}
           fill
-          sizes="20"
-          loading="eager"
+          sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-300"
         />
 
-        {/* Top Rated Badge */}
         {guide.avgRating >= 4.5 && (
           <span className="absolute top-2 left-2 bg-green-600 text-white text-[10px] px-2 py-1 rounded-full">
             Top Rated
@@ -51,32 +50,25 @@ const GuideCard = ({ guide }: GuideCardProps) => {
       <div className="flex-1 p-4 flex flex-col justify-between">
         {/* Header */}
         <div className="flex justify-between items-start gap-4">
-          {/* Left info */}
-          <div className="flex flex-col space-y-1 min-h-14">
+          <div className="flex flex-col space-y-1">
             <h3 className="font-semibold text-lg text-gray-800 leading-tight">
               {guide.name}
             </h3>
 
-            <p className="text-gray-500 text-sm leading-tight">
-              {guide.address || " "}
-            </p>
+            <p className="text-gray-500 text-sm">{guide.address || " "}</p>
 
             {/* Languages */}
-            <div className="flex items-center gap-1 text-xs text-gray-600 uppercase">
-              {guide.languages && guide.languages.length > 0 && (
-                <>
-                  <span>
-                    {guide.languages.slice(0, 2).join(", ")}
-                    {guide.languages.length > 2 && (
-                      <span className="text-gray-400">
-                        {" "}
-                        +{guide.languages.length - 2}
-                      </span>
-                    )}
+            {guide.languages && guide.languages.length > 0 && (
+              <div className="text-xs text-gray-600 uppercase">
+                {guide.languages.slice(0, 2).join(", ")}
+                {guide.languages.length > 2 && (
+                  <span className="text-gray-400">
+                    {" "}
+                    +{guide.languages.length - 2}
                   </span>
-                </>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Price */}
@@ -93,10 +85,10 @@ const GuideCard = ({ guide }: GuideCardProps) => {
           {guide.bio}
         </p>
 
-        <hr className="border-t border-gray-200" />
+        <hr className="my-3 border-gray-200" />
 
         {/* Footer */}
-        <div className="flex justify-between items-center mt-3">
+        <div className="flex justify-between items-center">
           <div className="text-center">
             <p className="text-gray-500 text-sm">Reviews</p>
             <p className="font-semibold">{guide.totalReviews}</p>

@@ -4,10 +4,9 @@ import AllGuide from "@/components/modules/Guides/AllGuide";
 
 const AllGuidesPage = () => {
   return (
-    <div className="mt-24 mb-10 px-10 max-w-8xl mx-auto ">
-      {/* sdfsd */}
+    <div className="mb-10 px-10 max-w-8xl mx-auto ">
       <div className="text-center mb-8 px-4">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+        <h1 className="text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight">
           Explore <span className="text-orange-500">Local Tour Guides</span>
         </h1>
 

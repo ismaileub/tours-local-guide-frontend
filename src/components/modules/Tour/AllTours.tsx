@@ -2,10 +2,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/ui/pagination";
-import TourCard from "@/components/modules/Home/TourCard";
 import TourCardSkeleton from "@/components/skeleton/TourCardSkeleton";
 import SortDropdown from "@/components/shared/SortDropdown";
 import TourFilter, { TourType } from "@/components/shared/TourFilter";
+import TourCard from "./TourCard";
 
 interface Tour {
   _id: string;
@@ -47,7 +47,7 @@ const AllTours = () => {
       }
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API}/tours?${params.toString()}`
+        `${process.env.NEXT_PUBLIC_BASE_API}/tours?${params.toString()}`,
       );
 
       const data = await res.json();

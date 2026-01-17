@@ -50,7 +50,10 @@ export default function Footer() {
             >
               About
             </Link>
-            <Link href="#" className="hover:text-indigo-400 transition-colors">
+            <Link
+              href="/contact"
+              className="hover:text-indigo-400 transition-colors"
+            >
               Contact
             </Link>
           </div>

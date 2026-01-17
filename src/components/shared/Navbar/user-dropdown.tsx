@@ -20,9 +20,7 @@ const UserDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
         <Image
-          src={
-            "https://res.cloudinary.com/djvsrgph0/image/upload/v1766677797/file-1766677775424-347957077.jpg"
-          }
+          src={user?.picture as string}
           alt="avatar"
           width={36}
           height={36}

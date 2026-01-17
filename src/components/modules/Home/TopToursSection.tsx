@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
-import TourCard from "./TourCard";
 import TourCardSkeleton from "@/components/skeleton/TourCardSkeleton"; // make sure path is correct
 import Link from "next/link";
+import TourCard from "../Tour/TourCard";
 
 interface Tour {
   _id: string;
@@ -27,7 +27,7 @@ const TopToursSection = () => {
     const fetchTours = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_API}/tours?limit=${itemsToShow}&page=1`
+          `${process.env.NEXT_PUBLIC_BASE_API}/tours?limit=${itemsToShow}&page=1`,
         );
         const data = await res.json();
         setTours(data.data || []);

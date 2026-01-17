@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 const Banner = () => {
   return (
     <div>
@@ -31,9 +32,12 @@ const Banner = () => {
             <button className="px-6 py-3 bg-white text-purple-700 font-semibold rounded-2xl shadow-xl hover:bg-purple-100 transition">
               Get Started
             </button>
-            <button className="px-6 py-3 bg-purple-800/60 border border-white/40 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-purple-800/80 transition">
+            <Link
+              href={"/about"}
+              className="px-6 py-3 bg-purple-800/60 border border-white/40 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-purple-800/80 transition"
+            >
               Learn More
-            </button>
+            </Link>
           </div>
         </motion.div>
       </section>

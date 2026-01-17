@@ -19,7 +19,7 @@ const GuideDetailsPage = async ({ params }: Props) => {
   const guide = data?.data;
 
   return (
-    <div className="py-8 px-4 max-w-7xl mx-auto">
+    <div className="px-4 max-w-7xl mx-auto">
       <GuideDetailsCard guide={guide} token={token} />
     </div>
   );

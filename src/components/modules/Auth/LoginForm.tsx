@@ -148,12 +148,12 @@ export default function LoginForm() {
         </Form>
         {/* Social Login Buttons */}
         <div className="flex flex-col gap-3 mt-4">
-          <Button
+          {/* <Button
             variant="outline"
             className="flex items-center justify-center gap-2"
             onClick={() => handleSocialLogin("github")}
           >
-            {/* GitHub */}
+            
             <Image
               src="https://img.icons8.com/ios-glyphs/24/github.png"
               alt="GitHub"
@@ -162,7 +162,7 @@ export default function LoginForm() {
               height={20}
             />
             Login with GitHub
-          </Button>
+          </Button> */}
 
           <Button
             variant="outline"

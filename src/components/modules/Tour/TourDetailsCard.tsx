@@ -70,7 +70,7 @@ export default function TourDetailsCard({ tour, token }: Props) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow overflow-hidden">
+    <div className="max-w-6xl mx-auto bg-white rounded-lg shadow overflow-hidden">
       {/* Cover Image */}
       <div className="relative w-full h-80">
         <Image

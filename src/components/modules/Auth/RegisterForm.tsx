@@ -13,17 +13,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { register } from "@/actions/auth";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export default function RegisterForm() {
   const form = useForm<FieldValues>({
@@ -31,34 +24,42 @@ export default function RegisterForm() {
       name: "",
       email: "",
       password: "",
-      role: "",
+      isGuide: false,
     },
   });
 
   const router = useRouter();
 
   const onSubmit = async (values: FieldValues) => {
+    const payload = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      role: values.isGuide ? "GUIDE" : "TOURIST",
+    };
+
     try {
-      console.log(values);
-      const res = await register(values);
-      console.log(res);
-      if (res?.data._id) {
+      const res = await register(payload);
+      if (res?.data?._id) {
         toast.success("User Registered Successfully");
         router.push("/login");
       }
     } catch (err) {
       console.error(err);
+      toast.error("Registration failed");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 w-full max-w-md bg-white p-8 rounded-lg shadow-md"
+          className="space-y-6 w-full max-w-md bg-white p-8 rounded-xl shadow-md"
         >
-          <h2 className="text-3xl font-bold text-center">Register Now</h2>
+          <h2 className="text-3xl font-bold text-center text-gray-900">
+            Register Now
+          </h2>
 
           {/* Name */}
           <FormField
@@ -96,33 +97,6 @@ export default function RegisterForm() {
             )}
           />
 
-          {/* Role */}
-          <FormField
-            control={form.control}
-            name="role"
-            rules={{ required: "Role is required" }}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Select Role</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choose role" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="GUIDE">Guide</SelectItem>
-                    <SelectItem value="TOURIST">Tourist</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           {/* Password */}
           <FormField
             control={form.control}
@@ -143,13 +117,36 @@ export default function RegisterForm() {
             )}
           />
 
-          <Button type="submit" className="w-full mt-2">
+          {/* Become Guide Checkbox */}
+          <FormField
+            control={form.control}
+            name="isGuide"
+            render={({ field }) => (
+              <FormItem className="flex items-start space-x-3 space-y-0 rounded-lg border p-4">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="leading-tight">
+                  <FormLabel className="font-medium">Become a Guide</FormLabel>
+                  <p className="text-sm text-gray-500">
+                    Offer your expertise, create tours, and get hired by
+                    travelers
+                  </p>
+                </div>
+              </FormItem>
+            )}
+          />
+
+          <Button type="submit" className="w-full">
             Register
           </Button>
 
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <Link href="/login" className="text-blue-500 hover:underline">
+            <Link href="/login" className="text-orange-500 hover:underline">
               Login
             </Link>
           </p>

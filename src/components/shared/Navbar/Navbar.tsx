@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const { status, data: session } = useSession();
-  console.log(session);
+  //console.log(session);
 
   return (
     <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-xl">
@@ -34,18 +34,20 @@ const Navbar = () => {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-4 ">
-          {status === "authenticated" && session?.user ? (
+        <div className="flex items-center gap-4">
+          {status === "loading" ? (
+            <div className="w-10 h-10 rounded-full bg-muted animate-pulse" />
+          ) : status === "authenticated" && session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="p-0 cursor-pointer rounded-full"
+                  className="p-0 rounded-full cursor-pointer"
                 >
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-10 w-10">
                     <AvatarImage
-                      src={session?.user?.picture || ""}
-                      alt={session?.user?.name || "User"}
+                      src={session.user.picture || ""}
+                      alt={session.user.name || "User"}
                     />
                     <AvatarFallback>
                       {session.user.name?.[0] || "U"}
@@ -53,6 +55,7 @@ const Navbar = () => {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent align="end" className="w-56">
                 {/* User info */}
                 <div className="p-3 border-b">
@@ -60,15 +63,16 @@ const Navbar = () => {
                   <p className="text-xs text-gray-500">{session.user.role}</p>
                 </div>
 
-                {/* Menu links */}
-                <DropdownMenuItem className="cursor-pointer">
+                <DropdownMenuItem asChild className="cursor-pointer">
                   <Link href="/dashboard">Dashboard</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
+
+                <DropdownMenuItem asChild className="cursor-pointer">
                   <Link href="/dashboard/profile">Profile</Link>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem
-                  className="cursor-pointer"
+                  className="cursor-pointer text-red-600"
                   onClick={() => signOut()}
                 >
                   Logout
@@ -76,11 +80,7 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button
-              asChild
-              className="rounded-full px-6 py-2"
-              variant="default"
-            >
+            <Button asChild className="rounded-full px-6 py-2">
               <Link href="/login">Login</Link>
             </Button>
           )}

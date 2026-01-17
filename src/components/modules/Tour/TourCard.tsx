@@ -1,58 +1,74 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { HiLocationMarker } from "react-icons/hi"; // Heroicons location
 
-interface TourCardProps {
+interface Tour {
   _id: string;
   title: string;
   location: string;
+  tourType: string;
   price: number;
   duration: string;
-  coverPhoto: string;
-  tourType: string;
+  coverPhoto?: string;
+  [key: string]: any;
 }
 
-const TourCard: React.FC<TourCardProps> = ({
-  _id,
-  title,
-  location,
-  price,
-  duration,
-  coverPhoto,
-  tourType,
-}) => {
+interface TourCardProps {
+  tour: Tour;
+}
+
+const TourCard: React.FC<TourCardProps> = ({ tour }) => {
   return (
-    <div className="border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition flex flex-col">
-      <div className="relative w-full h-40">
+    <Link
+      href={`/tours/${tour._id}`}
+      className="group block bg-white rounded-2xl shadow-lg overflow-hidden transition transform hover:-translate-y-2 hover:shadow-2xl"
+    >
+      {/* Image with overlay */}
+      <div className="relative w-full h-52 overflow-hidden">
         <Image
-          src={coverPhoto}
-          alt={title}
+          src={tour?.coverPhoto || "/avatar.jpg"}
+          alt={tour?.title || "Tour Image"}
           fill
-          className="object-cover"
-          priority
-          sizes="50"
+          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "/tour-placeholder.jpg";
+          }}
         />
-      </div>
-      <div className="p-4 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-sm text-gray-700">{location}</p>
-          <p className="text-sm text-blue-700 font-semibold">
-            Type: {tourType}
-          </p>
-          <p className="mt-2 font-medium">Price: $ {price}</p>
-          <p className="text-sm text-gray-600">Duration: {duration}</p>
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent"></div>
+        {/* Badges */}
+        <div className="absolute top-3 left-3">
+          <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+            {tour.tourType}
+          </span>
         </div>
-        <Link
-          href={`/dashboard/guide/tours/${_id}`}
-          className="mt-4 inline-block text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-          View Details
-        </Link>
+        <div className="absolute top-3 right-3">
+          <span className="bg-yellow-500 text-black text-xs font-semibold px-3 py-1 rounded-full">
+            ${tour.price}
+          </span>
+        </div>
       </div>
-    </div>
+
+      {/* Content */}
+      <div className="p-4 flex flex-col justify-between gap-2">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+          {tour.title}
+        </h3>
+        <p className="text-sm text-gray-500 flex items-center gap-1">
+          <HiLocationMarker className="w-4 h-4 text-red-500" />
+          {tour.location}
+        </p>
+
+        <div className="flex justify-between items-center mt-3 text-gray-600 text-sm font-medium">
+          <span className="flex items-center gap-1">⏱ {tour.duration}</span>
+          <span className="text-gray-500 text-xs">View Details →</span>
+        </div>
+      </div>
+    </Link>
   );
 };
 

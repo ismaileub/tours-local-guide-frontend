@@ -89,8 +89,8 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
       }
 
       const id = await getCompletedBookingId(token, tour._id);
-      console.log("tourid", tour._id);
-      console.log("complete booking", id);
+      //console.log("tourid", tour._id);
+      //console.log("complete booking", id);
       setBookingId(id);
       setCheckingReview(false);
     };
@@ -99,9 +99,9 @@ const TourDetailsCardForBooking: React.FC<TourDetailsCardProps> = ({
   }, [token, tour?._id]);
 
   return (
-    <div className="space-y-10 mt-20">
+    <div className="space-y-10">
       <div className="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-800 rounded-md">
-        <p className="font-semibold text-lg">
+        <p className="font-semibold text-base md:text-lg">
           Book this tour and get the guide for{" "}
           <span className="text-green-700">FREE!</span>
         </p>
