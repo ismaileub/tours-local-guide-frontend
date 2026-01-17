@@ -100,8 +100,8 @@ export default function Sidebar() {
   const links = role ? menuItems[role] : [];
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r bg-black text-white">
-      {/* Top navigation */}
+    <aside className="flex h-full w-56 shrink-0 flex-col border-r bg-black text-white">
+      {/* Navigation */}
       <nav className="flex-1 space-y-2 p-4">
         {links.map((item) => {
           const Icon = item.icon;
@@ -118,12 +118,12 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Bottom section */}
-      <div className="p-4 border-t border-gray-500">
+      {/* Logout */}
+      <div className="p-4 border-t border-gray-700">
         {status === "authenticated" && (
           <Button
             variant="destructive"
-            className="w-full justify-start gap-2 cursor-pointer"
+            className="w-full justify-start gap-2"
             onClick={() => signOut()}
           >
             <LogOut className="h-4 w-4" />
