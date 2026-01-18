@@ -38,7 +38,7 @@ export default function AdminAllUsersPage() {
         {
           headers: { authorization: token },
           cache: "no-store",
-        }
+        },
       );
       const data = await res.json();
       setUsers(data.data);
@@ -81,7 +81,7 @@ export default function AdminAllUsersPage() {
           headers: {
             authorization: session.user.accessToken,
           },
-        }
+        },
       );
 
       const data = await res.json();

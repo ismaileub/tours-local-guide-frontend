@@ -42,11 +42,11 @@ const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="p-0 rounded-full cursor-pointer"
+                  className="p-0 rounded-full cursor-pointer hidden md:block"
                 >
                   <Avatar className="h-10 w-10">
                     <AvatarImage
-                      src={session.user.picture || ""}
+                      src={session?.user?.picture || ""}
                       alt={session.user.name || "User"}
                     />
                     <AvatarFallback>

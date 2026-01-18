@@ -19,15 +19,12 @@ export default async function DashboardLayout({
         <Sidebar />
       </div>
 
-      {/* CONTENT AREA */}
       <section className="flex-1 overflow-y-auto">
-        {/* MOBILE HEADER */}
-        <div className="md:hidden flex items-center gap-3 border-b bg-white px-4 py-3">
+        <div className="md:hidden flex justify-between items-center gap-3 border-b bg-white px-4 py-3">
           <MobileSidebar />
           <h1 className="text-sm font-semibold">Dashboard</h1>
         </div>
 
-        {/* PAGE CONTENT */}
         <div className="px-3 py-4 md:p-6">{children}</div>
       </section>
     </main>

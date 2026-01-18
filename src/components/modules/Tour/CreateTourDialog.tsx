@@ -21,7 +21,7 @@ export default function CreateTourDialog({ token }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create New Tour</Button>
+        <Button className="">Create New Tour</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-xl">

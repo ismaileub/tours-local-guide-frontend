@@ -13,6 +13,7 @@ import {
   CalendarCheck,
   Clock,
   DollarSign,
+  MessageCircle,
 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 
@@ -39,6 +40,16 @@ export default function Sidebar() {
         label: "All Bookings",
         href: "/dashboard/admin/bookings",
         icon: Calendar,
+      },
+      {
+        label: "All Message",
+        href: "/dashboard/admin/contact-messages",
+        icon: MessageCircle,
+      },
+      {
+        label: "All Payment",
+        href: "/dashboard/admin/all-payment",
+        icon: DollarSign,
       },
       { label: "My Profile", href: "/dashboard/profile", icon: User },
     ],
@@ -96,7 +107,6 @@ export default function Sidebar() {
     ],
   };
 
-  // Fallback if no role yet
   const links = role ? menuItems[role] : [];
 
   return (
@@ -118,7 +128,6 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Logout */}
       <div className="p-4 border-t border-gray-700">
         {status === "authenticated" && (
           <Button

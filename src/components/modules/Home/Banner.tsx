@@ -24,14 +24,17 @@ const Banner = () => {
             <span className="block text-yellow-300">GuideHub</span>
           </h1>
           <p className="mt-4 text-white/90 text-xl max-w-2xl mx-auto">
-            Find trusted tour guides, discover hidden places, and start your
-            next adventure with confidence.
+            Find trusted tour guides, discover hidden places and start your next
+            adventure with confidence.
           </p>
 
           <div className="mt-8 flex items-center justify-center gap-4">
-            <button className="px-6 py-3 bg-white text-purple-700 font-semibold rounded-2xl shadow-xl hover:bg-purple-100 transition">
+            <Link
+              href={"/guides"}
+              className="px-6 py-3 bg-white text-purple-700 font-semibold rounded-2xl shadow-xl hover:bg-purple-100 transition"
+            >
               Get Started
-            </button>
+            </Link>
             <Link
               href={"/about"}
               className="px-6 py-3 bg-purple-800/60 border border-white/40 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-purple-800/80 transition"

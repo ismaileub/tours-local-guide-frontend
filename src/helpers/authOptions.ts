@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
@@ -33,7 +34,7 @@ declare module "next-auth/jwt" {
     id?: string;
     role?: string | null;
     accessToken?: string | null;
-    image?: string | null;
+    picture?: string | null;
   }
 }
 
@@ -42,13 +43,13 @@ declare module "next-auth/jwt" {
 ======================= */
 export const authOptions: NextAuthOptions = {
   providers: [
-    // ---------- GOOGLE LOGIN ----------
+    // ================= GOOGLE =================
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string,
     }),
 
-    // ---------- CREDENTIALS LOGIN ----------
+    // ================= CREDENTIALS =================
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -57,9 +58,7 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) {
-          return null;
-        }
+        if (!credentials?.email || !credentials.password) return null;
 
         try {
           const res = await fetch(
@@ -75,23 +74,20 @@ export const authOptions: NextAuthOptions = {
             },
           );
 
-          if (!res.ok) return null;
+          const data = await res.json();
 
-          const user = await res.json();
-          //console.log("in auth", user);
-
-          if (!user?.data?._id) return null;
+          if (!data?.data?._id) return null;
 
           return {
-            id: user.data._id,
-            name: user.data.name,
-            email: user.data.email,
-            role: user.data.role,
-            accessToken: user.data.accessToken,
-            picture: user.data.picture,
+            id: data.data._id,
+            name: data.data.name,
+            email: data.data.email,
+            role: data.data.role,
+            accessToken: data.data.accessToken,
+            picture: data.data.picture,
           };
-        } catch (error) {
-          console.error("Authorize error:", error);
+        } catch (err) {
+          console.error("Credentials login error:", err);
           return null;
         }
       },
@@ -102,6 +98,41 @@ export const authOptions: NextAuthOptions = {
      CALLBACKS
   ======================= */
   callbacks: {
+    // ---------- GOOGLE → BACKEND ----------
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_API}/auth/google`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: user.email,
+                name: user.name,
+                picture: user.image,
+              }),
+            },
+          );
+
+          const data = await res.json();
+
+          if (!data?.data?._id) return false;
+
+          // attach backend response
+          user.id = data.data._id;
+          user.role = data.data.role;
+          user.accessToken = data.data.accessToken;
+          user.picture = data.data.picture;
+        } catch (error) {
+          console.error("Google login error:", error);
+          return false;
+        }
+      }
+
+      return true;
+    },
+
     // ---------- JWT ----------
     async jwt({ token, user }) {
       if (user) {
@@ -128,8 +159,9 @@ export const authOptions: NextAuthOptions = {
   /* =======================
      CONFIG
   ======================= */
-  secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/login",
   },
+
+  secret: process.env.AUTH_SECRET,
 };

@@ -4,6 +4,7 @@ import { getUserSession } from "@/helpers/getUserSession";
 const MYProfilePage = async () => {
   const session = await getUserSession();
   const token = session?.user?.accessToken;
+  console.log(session);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/me`, {
     headers: {

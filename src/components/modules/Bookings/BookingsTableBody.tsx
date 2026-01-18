@@ -111,7 +111,7 @@ const BookingsTableBody = ({
                 </SelectContent>
               </Select>
             ) : (
-              <span className="text-xs text-gray-400 italic">No action</span>
+              <span className="text-xs text-gray-400  italic">No action</span>
             )}
           </TableCell>
         </TableRow>

@@ -6,7 +6,7 @@ const LoginPage = async () => {
   const session = await getUserSession();
   const token = session?.user?.accessToken as string;
 
-  // 🚫 Guard: logged-in users can't access login
+  //  Guard: logged-in users can't access login
   if (token) {
     redirect("/");
   }

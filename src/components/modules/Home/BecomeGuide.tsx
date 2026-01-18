@@ -2,8 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const BecomeGuide = () => {
+  const { status, data: session } = useSession();
+  const router = useRouter();
   return (
     <section
       className="relative  w-full h-[60vh] flex items-center justify-center bg-cover bg-center"
@@ -26,12 +31,18 @@ const BecomeGuide = () => {
           truly unforgettable experiences.
         </p>
 
-        <Link
-          href="/apply-guide"
-          className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-full transition"
+        <button
+          onClick={() => {
+            if (status === "authenticated") {
+              toast.info("You are already logged in");
+              return;
+            }
+            router.push("/register");
+          }}
+          className="inline-block bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer font-semibold px-8 py-2 rounded-full transition"
         >
-          Apply Now
-        </Link>
+          Become A Guide
+        </button>
       </div>
     </section>
   );

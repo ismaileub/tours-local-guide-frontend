@@ -21,6 +21,7 @@ export const NavigationSheet = () => {
     { name: "Tours", href: "/tours" },
     { name: "Guides", href: "/guides" },
     { name: "Contact", href: "/contact" },
+    { name: "Dashboard", href: "/dashboard" },
   ];
 
   return (

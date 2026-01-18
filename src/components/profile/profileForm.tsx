@@ -62,7 +62,7 @@ export default function ProfileForm({ user, token }: any) {
             authorization: token || "",
           },
           body: formData,
-        }
+        },
       );
 
       const result = await res.json();
@@ -165,7 +165,7 @@ export default function ProfileForm({ user, token }: any) {
                 )}
               </div>
 
-              <div className="mt-8 flex justify-end">
+              <div className="mt-8 flex justify-center md:justify-end">
                 <button
                   onClick={() => setIsEditing(true)}
                   className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition"

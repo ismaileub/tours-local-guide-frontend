@@ -121,3 +121,19 @@
   }
 }
 
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.dialog-animate {
+  animation: dialog-in 0.25s ease-out;
+}
+

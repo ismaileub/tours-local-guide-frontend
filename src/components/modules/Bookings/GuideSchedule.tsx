@@ -60,45 +60,9 @@ const GuideSchedule = ({ token }: { token?: string }) => {
   };
 
   return (
-    // <div className="border rounded-lg shadow overflow-x-auto">
-    //   <h1 className="text-xl font-semibold text-center py-4">
-    //     Your Schedule ({meta?.total || 0})
-    //   </h1>
-
-    //   {/* 🔑 THIS IS THE IMPORTANT PART */}
-    //   <div className="relative w-full overflow-x-auto">
-    //     <Table className="min-w-[1100px] table-fixed">
-    //       <colgroup>
-    //         <col className="w-22.5" />
-    //         <col className="w-[150px]" />
-    //         <col className="w-[100px]" />
-    //         <col className="w-[105px]" />
-    //         <col className="w-[150px]" />
-    //         <col className="w-[220px]" />
-    //         <col className="w-[60px] " />
-    //         <col className="w-[100px]" />
-    //         <col className="w-[115px] " />
-    //       </colgroup>
-
-    //       <BookingsTableHeader />
-    //       <BookingsTableBody
-    //         bookings={bookings}
-    //         loading={loading}
-    //         handleStatusChange={handleStatusChange}
-    //       />
-    //     </Table>
-    //   </div>
-
-    //   <Pagination
-    //     currentPage={meta.page}
-    //     totalPages={meta.totalPages}
-    //     onPageChange={setPage}
-    //   />
-    // </div>
-
     <>
       {/* DESKTOP TABLE */}
-      <div className="hidden md:block border rounded-lg shadow">
+      <div className=" md:block border rounded-lg shadow">
         <h1 className="text-xl font-semibold text-center py-4">
           Your Schedule ({meta?.total || 0})
         </h1>
@@ -134,7 +98,7 @@ const GuideSchedule = ({ token }: { token?: string }) => {
       </div>
 
       {/* MOBILE CARDS */}
-      <div className="md:hidden space-y-4">
+      {/* <div className="md:hidden space-y-4">
         <h1 className="text-lg font-semibold px-1">
           Your Schedule ({meta?.total || 0})
         </h1>
@@ -146,20 +110,18 @@ const GuideSchedule = ({ token }: { token?: string }) => {
                 className="h-36 rounded-lg bg-gray-200 animate-pulse"
               />
             ))
-          : bookings.map((booking) => (
+          : bookings?.map((booking) => (
               <div
                 key={booking._id}
                 className="rounded-lg border bg-white p-4 shadow-sm space-y-3"
               >
-                {/* TOP */}
                 <div>
                   <p className="font-semibold">{booking.touristId?.name}</p>
-                  <p className="text-xs text-gray-500 truncate max-w-[200px]">
+                  <p className="text-xs text-gray-500 truncate max-w-50">
                     {booking.touristId?.email}
                   </p>
                 </div>
 
-                {/* DETAILS */}
                 <div className="text-sm space-y-1">
                   <p>
                     <span className="font-medium">Type:</span>{" "}
@@ -175,12 +137,9 @@ const GuideSchedule = ({ token }: { token?: string }) => {
                   </p>
                 </div>
 
-                {/* FOOTER */}
                 <div className="flex items-center justify-between pt-2 border-t">
-                  {/* STATUS BADGE AT BOTTOM */}
                   <StatusBadge status={booking.status} />
 
-                  {/* VIEW LINK ONLY FOR TOUR PACKAGE */}
                   {booking.bookingType === "TOUR_PACKAGE" &&
                     booking.tourId?._id && (
                       <a
@@ -192,7 +151,6 @@ const GuideSchedule = ({ token }: { token?: string }) => {
                     )}
                 </div>
 
-                {/* ACTION BUTTON */}
                 {booking.status === "CONFIRMED" && (
                   <button
                     onClick={() => handleStatusChange(booking._id, "COMPLETED")}
@@ -203,7 +161,7 @@ const GuideSchedule = ({ token }: { token?: string }) => {
                 )}
               </div>
             ))}
-      </div>
+      </div> */}
     </>
   );
 };
