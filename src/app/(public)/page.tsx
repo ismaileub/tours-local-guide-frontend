@@ -2,6 +2,8 @@
 import Adventure from "@/components/modules/Home/Adventure";
 import Banner from "@/components/modules/Home/Banner";
 import BecomeGuide from "@/components/modules/Home/BecomeGuide";
+import FAQSection from "@/components/modules/Home/FAQSection";
+import Testimonials from "@/components/modules/Home/Testimonials";
 import TopGuide from "@/components/modules/Home/TopGuide";
 import TopToursSection from "@/components/modules/Home/TopToursSection";
 import WhyUs from "@/components/modules/Home/WhyUs";
@@ -23,9 +25,6 @@ const HomePage = () => {
       </section>
 
       <WhyUs />
-
-      <BecomeGuide />
-
       <section className="bg-gray-100 px-10 pb-4">
         <div className="  mx-auto py-5 text-center">
           <h2 className="text-3xl font-bold text-gray-800">
@@ -37,8 +36,16 @@ const HomePage = () => {
         </div>
         <TopToursSection />
       </section>
+      <div className="mx-auto">
+        <Testimonials />
+      </div>
+
+      <BecomeGuide />
 
       <Adventure />
+      <div className="bg-gray-200">
+        <FAQSection />
+      </div>
     </div>
   );
 };
