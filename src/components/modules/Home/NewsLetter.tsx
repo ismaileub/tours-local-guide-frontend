@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Subscribed with: ${email}`);
-    setEmail("");
+
+    if (!email) {
+      toast.error("Please enter your email!");
+      return;
+    }
+
+    toast.success(`Thank you for subscribing with ${email}!`);
+    setEmail(""); // Clear input
   };
 
   return (
@@ -20,7 +27,7 @@ export default function Newsletter() {
         </p>
 
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubscribe}
           className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto"
         >
           <input

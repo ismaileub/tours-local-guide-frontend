@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "swiperjs.com",
+        hostname: "images.unsplash.com",
       },
     ],
   },

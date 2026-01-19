@@ -3,11 +3,12 @@ import Adventure from "@/components/modules/Home/Adventure";
 import Banner from "@/components/modules/Home/Banner";
 import BecomeGuide from "@/components/modules/Home/BecomeGuide";
 import FAQSection from "@/components/modules/Home/FAQSection";
+import Newsletter from "@/components/modules/Home/NewsLetter";
+import ServicesSection from "@/components/modules/Home/ServicesSection";
 import Testimonials from "@/components/modules/Home/Testimonials";
 import TopGuide from "@/components/modules/Home/TopGuide";
 import TopToursSection from "@/components/modules/Home/TopToursSection";
 import WhyUs from "@/components/modules/Home/WhyUs";
-import React from "react";
 
 const HomePage = () => {
   return (
@@ -24,7 +25,7 @@ const HomePage = () => {
         <TopGuide />
       </section>
 
-      <WhyUs />
+      <ServicesSection />
       <section className="bg-gray-100 px-10 pb-4">
         <div className="  mx-auto py-5 text-center">
           <h2 className="text-3xl font-bold text-gray-800">
@@ -36,15 +37,21 @@ const HomePage = () => {
         </div>
         <TopToursSection />
       </section>
+
+      <WhyUs />
+
+      <BecomeGuide />
       <div className="mx-auto">
         <Testimonials />
       </div>
 
-      <BecomeGuide />
-
       <Adventure />
       <div className="bg-gray-200">
         <FAQSection />
+      </div>
+
+      <div>
+        <Newsletter />
       </div>
     </div>
   );

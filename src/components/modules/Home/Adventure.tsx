@@ -12,9 +12,9 @@ const Adventure = () => {
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
           Ready to travel with real adventure & enjoy nature
         </h2>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+        {/* <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
           Check Availability
-        </button>
+        </button> */}
       </div>
 
       {/* Right content - features */}

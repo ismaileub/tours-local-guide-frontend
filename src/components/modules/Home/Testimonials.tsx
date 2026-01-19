@@ -11,6 +11,10 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { CalendarDays, Compass, MapPin } from "lucide-react";
+//
+//
+//
+//
 
 const reviews = [
   {
@@ -28,7 +32,7 @@ const reviews = [
     location: "Bangkok, Thailand",
     trip: "Guide Hire",
     date: "Nov 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/qFnNRh1T/profile5.png",
     review: "Our guide was punctual, friendly, and very informative.",
   },
   {
@@ -37,7 +41,7 @@ const reviews = [
     location: "New York, USA",
     trip: "City Life",
     date: "Jun 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/6cdmh23F/profile4.png",
     review: "City tour was well-paced with knowledgeable guides.",
   },
   {
@@ -46,7 +50,7 @@ const reviews = [
     location: "Kyoto, Japan",
     trip: "Historical",
     date: "Jul 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/6RbvfyPY/profile3.png",
     review: "Loved the historical temples and cultural insights provided.",
   },
   {
@@ -55,7 +59,7 @@ const reviews = [
     location: "Swiss Alps, Switzerland",
     trip: "Hill Tracks",
     date: "Aug 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/4Zhfrp17/profile2.png",
     review: "The mountain tracks were breathtaking. A must-do adventure.",
   },
   {
@@ -64,7 +68,7 @@ const reviews = [
     location: "Istanbul, Turkey",
     trip: "Guide Hire",
     date: "Jan 2027",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/KxSsDdQ3/profile1.png",
     review: "Guide was very knowledgeable and tailored the tour perfectly.",
   },
   {
@@ -76,13 +80,14 @@ const reviews = [
     image: "https://i.ibb.co.com/ggjHwmF/profile.png",
     review: "Vibrant nightlife and great organization. Loved every moment!",
   },
+
   {
     name: "Ethan Thompson",
     role: "Traveler",
     location: "Mekong Delta, Vietnam",
     trip: "River Side",
     date: "Oct 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/Vq2Nxj0/boy1.png",
     review: "Peaceful river tours and very knowledgeable guides.",
   },
 
@@ -92,7 +97,7 @@ const reviews = [
     location: "Cape Town, South Africa",
     trip: "Guide Hire",
     date: "Dec 2026",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/KhvYGdx/boy2.jpg",
     review: "Excellent guide who made our safari experience unforgettable.",
   },
 
@@ -102,7 +107,7 @@ const reviews = [
     location: "Queenstown, New Zealand",
     trip: "Guide Hire",
     date: "Feb 2027",
-    image: "https://i.ibb.co.com/ggjHwmF/profile.png",
+    image: "https://i.ibb.co.com/XbhGn0c/girl1.jpg",
     review:
       "Professional guide with excellent safety tips for adventure sports.",
   },
@@ -199,7 +204,7 @@ export default function Testimonials() {
                   alt={item.name}
                   width={60}
                   height={60}
-                  className="rounded-full border-2 border-blue-500"
+                  className="rounded-full w-14 h-14 border-2 border-blue-500"
                 />
 
                 <div className="text-left">
