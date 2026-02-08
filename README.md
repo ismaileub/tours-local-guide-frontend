@@ -217,7 +217,7 @@ frontend/
 
 ## 🙌 Author
 
-**Your Name**
+**Ismail Hossain **
 
 - GitHub: [https://github.com/ismaileub](https://github.com/ismaileub)
 - Email: ismail301515@gmail.com
