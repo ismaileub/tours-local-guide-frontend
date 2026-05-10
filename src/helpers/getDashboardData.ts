@@ -9,7 +9,7 @@ export const getDashboardData = async () => {
       headers: {
         authorization: token,
       },
-    }
+    },
   );
 
   console.log(res);
