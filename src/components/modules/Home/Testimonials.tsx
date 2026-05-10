@@ -118,13 +118,13 @@ export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="bg-gray-200 py-10">
+    <section className="bg-gray-50 py-12">
       {/* HEADER */}
-      <div className="text-center  px-4">
+      <div className="text-center px-4">
         <h2 className="text-4xl font-bold text-gray-900">
           What Our Customers Say
         </h2>
-        <p className="text-gray-600 mt-3">
+        <p className="text-gray-700 mt-3">
           Real experiences from travelers around the world
         </p>
       </div>
@@ -132,27 +132,27 @@ export default function Testimonials() {
       {/* STATS */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-5">
         <div>
-          <h3 className="text-4xl font-bold text-blue-600">
+          <h3 className="text-4xl font-bold text-orange-600">
             <CountUp end={12} duration={2} />
             k+
           </h3>
-          <p className="text-gray-600 mt-1">Happy Travelers</p>
+          <p className="text-gray-700 mt-1">Happy Travelers</p>
         </div>
         <div>
-          <h3 className="text-4xl font-bold text-blue-600">
+          <h3 className="text-4xl font-bold text-orange-600">
             <CountUp end={450} duration={2} />+
           </h3>
-          <p className="text-gray-600 mt-1">Verified Guides</p>
+          <p className="text-gray-700 mt-1">Verified Guides</p>
         </div>
         <div>
-          <h3 className="text-4xl font-bold text-blue-600">
+          <h3 className="text-4xl font-bold text-orange-600">
             <CountUp end={120} duration={2} />+
           </h3>
-          <p className="text-gray-600 mt-1">Destinations</p>
+          <p className="text-gray-700 mt-1">Destinations</p>
         </div>
         <div>
-          <h3 className="text-4xl font-bold text-blue-600">4.9★</h3>
-          <p className="text-gray-600 mt-1">Average Rating</p>
+          <h3 className="text-4xl font-bold text-orange-600">4.9★</h3>
+          <p className="text-gray-700 mt-1">Average Rating</p>
         </div>
       </div>
 
@@ -193,6 +193,8 @@ export default function Testimonials() {
                 rounded-3xl
                 p-6
                 shadow-xl
+                ring-1
+                ring-gray-200
                 transition-all
                 duration-500
               "
@@ -204,29 +206,29 @@ export default function Testimonials() {
                   alt={item.name}
                   width={60}
                   height={60}
-                  className="rounded-full w-14 h-14 border-2 border-blue-500"
+                  className="rounded-full w-14 h-14 border-2 border-orange-500"
                 />
 
                 <div className="text-left">
                   <h4 className="font-semibold text-gray-900">{item.name}</h4>
-                  <p className="text-sm text-gray-500">{item.role}</p>
+                  <p className="text-sm text-gray-600">{item.role}</p>
                 </div>
               </div>
 
               {/* DETAILS */}
-              <div className="flex flex-wrap gap-2 text-xs text-gray-500 mb-3">
+              <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-3">
                 <span className="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full">
-                  <MapPin size={14} className="text-blue-500" />
+                  <MapPin size={14} className="text-orange-600" />
                   {item.location}
                 </span>
 
                 <span className="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full">
-                  <Compass size={14} className="text-green-500" />
+                  <Compass size={14} className="text-emerald-600" />
                   {item.trip}
                 </span>
 
                 <span className="flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full">
-                  <CalendarDays size={14} className="text-purple-500" />
+                  <CalendarDays size={14} className="text-indigo-600" />
                   {item.date}
                 </span>
               </div>
@@ -250,7 +252,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* REVIEW */}
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-700 text-sm leading-relaxed">
                   “{item.review}”
                 </p>
               </div>

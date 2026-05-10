@@ -41,29 +41,43 @@ const faqs = [
   },
 ];
 
+import { HelpCircle } from "lucide-react";
+
 const FAQSection = () => {
   return (
-    <div className="max-w-5xl mx-auto py-12 px-4">
-      <h2 className="text-3xl font-bold text-center mb-8">
-        Frequently Asked Questions
-      </h2>
-      <Accordion type="single" collapsible className="space-y-2">
-        {faqs.map((faq, index) => (
-          <AccordionItem
-            key={index}
-            value={`item-${index}`}
-            className="border rounded-lg"
-          >
-            <AccordionTrigger className=" text-lg md:text-xl cursor-pointer px-4 py-2">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="px-4 py-2 text-left text-gray-700 leading-relaxed">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
+    <section className="bg-white py-10 px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center justify-center p-2 bg-orange-100 rounded-xl mb-4">
+            <HelpCircle className="w-6 h-6 text-orange-600" />
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
+            Got Questions?
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Everything you need to know about our tours, guides, and booking
+            process.
+          </p>
+        </div>
+
+        <Accordion type="single" collapsible className="space-y-4">
+          {faqs.map((faq, index) => (
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className="border border-gray-200 rounded-2xl overflow-hidden transition-all duration-200 hover:border-orange-200 hover:shadow-sm data-[state=open]:border-orange-300 data-[state=open]:shadow-md px-2"
+            >
+              <AccordionTrigger className="text-left text-lg font-semibold text-gray-800 cursor-pointer px-4 py-6 hover:no-underline hover:text-orange-600 transition-colors">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pb-6 text-gray-600 text-base leading-relaxed">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
   );
 };
 

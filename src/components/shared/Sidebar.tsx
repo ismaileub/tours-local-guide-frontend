@@ -110,7 +110,7 @@ export default function Sidebar() {
   const links = role ? menuItems[role] : [];
 
   return (
-    <aside className="flex h-full w-56 shrink-0 flex-col border-r bg-black text-white">
+    <aside className="flex h-full w-56 shrink-0 flex-col border-r border-gray-800 bg-gray-900 text-gray-100">
       {/* Navigation */}
       <nav className="flex-1 space-y-2 p-4">
         {links.map((item) => {
@@ -119,7 +119,7 @@ export default function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 hover:text-black"
+              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-200 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
             >
               <Icon className="h-4 w-4" />
               {item.label}

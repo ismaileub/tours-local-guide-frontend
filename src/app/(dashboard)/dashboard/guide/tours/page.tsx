@@ -36,14 +36,16 @@ const ToursPage = async () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <div className=" flex-col md:flex justify-between  text-center items-center mb-6 space-y-5 md:space-y-0">
+    <div className="max-w-7xl mx-auto px-4 mt-5">
+      <div className=" flex md:flex justify-between  text-center items-center mb-6 space-y-5 md:space-y-0">
         <h1 className="text-2xl font-bold">My Tours</h1>
         <CreateTourDialog token={token} />
       </div>
 
       {tours.length === 0 ? (
-        <p>No tours found.</p>
+        <p className="text-muted-foreground text-center py-10">
+          No tours found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {tours?.map((tour) => (

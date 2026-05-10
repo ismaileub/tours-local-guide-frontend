@@ -86,10 +86,10 @@ const BookingsTableBody = ({
             )}
             {booking.status === "COMPLETED" && (
               <div className="flex flex-col gap-1">
-                <span className="px-2 py-1 text-xs rounded bg-green-200 text-red-800">
+                <span className="px-2 py-1 text-xs rounded bg-green-200 text-green-800">
                   COMPLETED
                 </span>
-                <span className="text-[11px] text-red-600">
+                <span className="text-[11px] text-muted-foreground">
                   {getCancelledText(booking)}
                 </span>
               </div>
@@ -111,7 +111,9 @@ const BookingsTableBody = ({
                 </SelectContent>
               </Select>
             ) : (
-              <span className="text-xs text-gray-400  italic">No action</span>
+              <span className="text-xs text-muted-foreground italic">
+                No action
+              </span>
             )}
           </TableCell>
         </TableRow>

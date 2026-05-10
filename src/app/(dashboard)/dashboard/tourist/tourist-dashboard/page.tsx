@@ -10,7 +10,7 @@ const TouristDashboardPage = async () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold">Tourist Dashboard</h1>
-        <p className="text-gray-500">
+        <p className="text-muted-foreground">
           Track your bookings, payments, and travel history
         </p>
       </div>

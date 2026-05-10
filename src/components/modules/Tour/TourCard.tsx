@@ -58,7 +58,7 @@ const TourCard: React.FC<TourCardProps> = ({ tour }) => {
 
       {/* Content */}
       <div className="p-4 flex flex-col justify-between gap-2">
-        <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-orange-500 transition">
           {tour?.title}
         </h3>
         <p className="text-sm text-gray-500 flex items-center gap-1">

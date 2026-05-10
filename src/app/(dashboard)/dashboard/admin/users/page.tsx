@@ -164,7 +164,7 @@ export default function AdminAllUsersPage() {
                   {user.isDeleted ? (
                     <button
                       disabled
-                      className="px-3 py-1 bg-gray-300 text-gray-500 rounded text-xs cursor-not-allowed"
+                      className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs cursor-not-allowed"
                     >
                       Deleted
                     </button>
@@ -184,7 +184,9 @@ export default function AdminAllUsersPage() {
 
         {loading && <p className="text-center py-6">Loading users...</p>}
         {!loading && users?.length === 0 && (
-          <p className="text-center py-6 text-gray-500">No users found</p>
+          <p className="text-center py-6 text-muted-foreground">
+            No users found
+          </p>
         )}
       </div>
 

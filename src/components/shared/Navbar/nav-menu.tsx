@@ -17,7 +17,7 @@ export const NavMenu = ({ className }: { className?: string }) => {
 
   return (
     <div className={cn("flex items-center gap-8", className)}>
-      {links.map((link) => {
+      {links?.map((link) => {
         const active = pathname === link.href;
 
         return (

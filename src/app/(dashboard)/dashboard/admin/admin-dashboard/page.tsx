@@ -10,7 +10,7 @@ const AdminDashboardPage = async () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <p className="text-gray-500">
+        <p className="text-muted-foreground">
           Manage users, bookings, tours, and platform revenue
         </p>
       </div>

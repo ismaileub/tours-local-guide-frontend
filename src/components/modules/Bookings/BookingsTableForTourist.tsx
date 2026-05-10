@@ -42,7 +42,7 @@ const BookingsTableForTourist = ({ token }: { token?: string }) => {
         {
           headers: { authorization: token || "" },
           cache: "no-store",
-        }
+        },
       );
       const data = await res.json();
       //console.log(data);
@@ -72,7 +72,7 @@ const BookingsTableForTourist = ({ token }: { token?: string }) => {
             Authorization: token || "",
           },
           body: JSON.stringify({ status }),
-        }
+        },
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
@@ -167,10 +167,10 @@ const BookingsTableForTourist = ({ token }: { token?: string }) => {
                 )}
                 {booking.status === "COMPLETED" && (
                   <div className="flex flex-col gap-1">
-                    <span className="px-2 py-1 text-xs rounded bg-green-200 text-red-800">
+                    <span className="px-2 py-1 text-xs rounded bg-green-200 text-green-800">
                       COMPLETED
                     </span>
-                    <span className="text-[11px] text-red-600">
+                    <span className="text-[11px] text-muted-foreground">
                       {getCancelledText(booking)}
                     </span>
                   </div>
@@ -194,7 +194,7 @@ const BookingsTableForTourist = ({ token }: { token?: string }) => {
                       handleStatusChange(booking._id, value)
                     }
                   >
-                    <SelectTrigger className="w-[160px]">
+                    <SelectTrigger className="w-40">
                       <SelectValue placeholder="Select action" />
                     </SelectTrigger>
                     <SelectContent>
@@ -203,7 +203,7 @@ const BookingsTableForTourist = ({ token }: { token?: string }) => {
                     </SelectContent>
                   </Select>
                 ) : (
-                  <span className="text-xs text-gray-400 italic">
+                  <span className="text-xs text-muted-foreground italic">
                     No action
                   </span>
                 )}

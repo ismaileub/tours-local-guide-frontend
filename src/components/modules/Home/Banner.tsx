@@ -4,7 +4,8 @@ import Link from "next/link";
 const Banner = () => {
   return (
     <div>
-      <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-blue-600 via-cyan-500 to-green-400">
+      <section className="relative w-full h-[70vh] flex items-center justify-center overflow-hidden bg-linear-to-br from-blue-800 via-cyan-700 to-emerald-600">
+        <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
         {/* Background shapes */}
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
@@ -23,7 +24,7 @@ const Banner = () => {
             Explore the World With
             <span className="block text-yellow-300">GuideHub</span>
           </h1>
-          <p className="mt-4 text-white/90 text-xl max-w-2xl mx-auto">
+          <p className="mt-4 text-white/95 text-xl max-w-2xl mx-auto">
             Find trusted tour guides, discover hidden places and start your next
             adventure with confidence.
           </p>
@@ -31,13 +32,13 @@ const Banner = () => {
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link
               href={"/guides"}
-              className="px-6 py-3 bg-white text-purple-700 font-semibold rounded-2xl shadow-xl hover:bg-purple-100 transition"
+              className="px-6 py-3 bg-white text-blue-900 font-semibold rounded-2xl shadow-xl hover:bg-slate-100 transition"
             >
               Get Started
             </Link>
             <Link
               href={"/about"}
-              className="px-6 py-3 bg-purple-800/60 border border-white/40 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-purple-800/80 transition"
+              className="px-6 py-3 bg-blue-900/60 border border-white/50 text-white font-semibold rounded-2xl backdrop-blur-sm hover:bg-blue-900/80 transition"
             >
               Learn More
             </Link>

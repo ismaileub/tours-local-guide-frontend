@@ -10,7 +10,7 @@ const GuideDashboardPage = async () => {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold">Guide Dashboard</h1>
-        <p className="text-gray-500">
+        <p className="text-muted-foreground">
           Manage your tours, bookings, and earnings
         </p>
       </div>

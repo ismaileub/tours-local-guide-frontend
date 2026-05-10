@@ -26,7 +26,7 @@ const TouristPaymentPage = async () => {
       headers: {
         authorization: token,
       },
-    }
+    },
   );
 
   const data = await res.json();
@@ -40,7 +40,7 @@ const TouristPaymentPage = async () => {
       headers: {
         authorization: token,
       },
-    }
+    },
   );
 
   const result = await response.json();
@@ -68,7 +68,7 @@ const TouristPaymentPage = async () => {
                   : "Tour Package"}
               </p>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Date: {new Date(booking.tourDate).toDateString()}
               </p>
 
@@ -115,7 +115,7 @@ const TouristPaymentPage = async () => {
                   : "Tour Package"}
               </p>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Date: {new Date(booking.tourDate).toDateString()}
               </p>
 

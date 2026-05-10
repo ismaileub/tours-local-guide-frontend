@@ -29,7 +29,7 @@ const GuidePaymentHistoryPage = async () => {
       headers: {
         authorization: token,
       },
-    }
+    },
   );
 
   const data = await res.json();
@@ -43,7 +43,7 @@ const GuidePaymentHistoryPage = async () => {
       headers: {
         authorization: token,
       },
-    }
+    },
   );
 
   const result = await response.json();
@@ -51,7 +51,7 @@ const GuidePaymentHistoryPage = async () => {
   //console.log(PaidBookings);
 
   if (!UnPaidBookings.length)
-    return <p className="text-gray-500">No pending payments</p>;
+    return <p className="text-muted-foreground">No pending payments</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
@@ -71,7 +71,7 @@ const GuidePaymentHistoryPage = async () => {
                   : "Tour Package"}
               </p>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Date: {new Date(booking.tourDate).toDateString()}
               </p>
 
@@ -102,7 +102,7 @@ const GuidePaymentHistoryPage = async () => {
             <div className="flex items-center gap-3 text-right">
               <div>
                 <p className="font-semibold">{booking?.touristId?.name}</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-muted-foreground">
                   {booking?.touristId?.email}
                 </p>
               </div>
@@ -125,7 +125,7 @@ const GuidePaymentHistoryPage = async () => {
                   : "Tour Package"}
               </p>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Date: {new Date(booking.tourDate).toDateString()}
               </p>
 

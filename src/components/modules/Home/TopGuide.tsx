@@ -87,7 +87,7 @@ const TopGuidesSection = () => {
         <div className="text-center mt-10">
           <Link
             href="/guides"
-            className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition"
+            className="inline-flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white cursor-pointer font-semibold px-8 py-2 rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40"
           >
             View All Guides
           </Link>

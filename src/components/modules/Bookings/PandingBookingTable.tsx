@@ -42,7 +42,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
         {
           headers: { Authorization: token || "" },
           cache: "no-store",
-        }
+        },
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
@@ -70,7 +70,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
             Authorization: token || "",
           },
           body: JSON.stringify({ status }),
-        }
+        },
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
@@ -159,7 +159,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                       handleStatusChange(booking?._id, value)
                     }
                   >
-                    <SelectTrigger className="w-[160px]">
+                    <SelectTrigger className="w-40">
                       <SelectValue placeholder="Select action" />
                     </SelectTrigger>
                     <SelectContent>
@@ -168,7 +168,7 @@ const PendingBookingsTable = ({ token }: { token?: string }) => {
                     </SelectContent>
                   </Select>
                 ) : (
-                  <span className="text-xs text-gray-400 italic">
+                  <span className="text-xs text-muted-foreground italic">
                     No action
                   </span>
                 )}

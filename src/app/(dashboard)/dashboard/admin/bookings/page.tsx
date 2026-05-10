@@ -57,7 +57,11 @@ export default function AdminAllBookings() {
   }, [currentPage, status]);
 
   if (status === "loading") {
-    return <p className="text-center py-6 text-gray-500">Loading session...</p>;
+    return (
+      <p className="text-center py-6 text-muted-foreground">
+        Loading session...
+      </p>
+    );
   }
 
   return (
@@ -94,12 +98,16 @@ export default function AdminAllBookings() {
                   <TableRow key={b._id}>
                     <TableCell>
                       <p className="font-semibold">{b.tourist.name}</p>
-                      <p className="text-xs text-gray-500">{b.tourist.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {b.tourist.email}
+                      </p>
                     </TableCell>
 
                     <TableCell>
                       <p className="font-semibold">{b.guide.name}</p>
-                      <p className="text-xs text-gray-500">{b.guide.email}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {b.guide.email}
+                      </p>
                     </TableCell>
 
                     <TableCell>
@@ -109,7 +117,9 @@ export default function AdminAllBookings() {
                           : "Tour Package"}
                       </p>
                       {b.tour && (
-                        <p className="text-xs text-gray-500">{b.tour.title}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {b.tour.title}
+                        </p>
                       )}
                     </TableCell>
 
@@ -166,7 +176,9 @@ export default function AdminAllBookings() {
         </Table>
 
         {!loading && bookings.length === 0 && (
-          <p className="text-center py-6 text-gray-500">No bookings found</p>
+          <p className="text-center py-6 text-muted-foreground">
+            No bookings found
+          </p>
         )}
       </div>
 

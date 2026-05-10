@@ -17,12 +17,12 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="bg-gray-900 text-white py-16 relative">
+    <section className="bg-gray-50 text-gray-900 py-16 relative">
       <div className="container mx-auto px-6 md:px-12 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-indigo-500">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
           Stay Updated
         </h2>
-        <p className="text-gray-400 mb-8">
+        <p className="text-gray-600 mb-8">
           Subscribe to our newsletter for the latest travel guides and tips.
         </p>
 
@@ -36,11 +36,11 @@ export default function Newsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full sm:flex-1 px-4 py-3 rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full sm:flex-1 px-4 py-3 rounded-md border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-md text-white font-semibold transition-colors"
+            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-md text-white font-semibold transition-colors"
           >
             Subscribe
           </button>
