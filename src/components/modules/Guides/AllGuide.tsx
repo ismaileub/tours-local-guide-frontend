@@ -53,14 +53,14 @@ const AllGuide = () => {
       const res = await fetch(
         `${
           process.env.NEXT_PUBLIC_BASE_API
-        }/users/get-all-guide?${params.toString()}`
+        }/users/get-all-guide?${params.toString()}`,
       );
 
       const data = await res.json();
 
-      setGuides(data.data);
-      setTotalPages(data.meta?.totalPages || 1);
-      setTotalItems(data.meta?.total || 0);
+      setGuides(data?.data);
+      setTotalPages(data?.meta?.totalPages || 1);
+      setTotalItems(data?.meta?.total || 0);
     } catch (err) {
       console.error(err);
     } finally {
@@ -105,13 +105,13 @@ const AllGuide = () => {
       {/* loading */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
         {loading
-          ? Array.from({ length: itemsPerPage }).map((_, i) => (
+          ? Array.from({ length: itemsPerPage })?.map((_, i) => (
               <GuideCardSkeleton key={i} />
             ))
-          : guides.map((guide) => <GuideCard key={guide._id} guide={guide} />)}
+          : guides?.map((guide) => <GuideCard key={guide._id} guide={guide} />)}
       </div>
 
-      {!loading && guides.length === 0 && (
+      {!loading && guides?.length === 0 && (
         <div className="flex flex-col items-center justify-center mt-16 text-center">
           <p className="text-lg font-medium text-gray-600">No guides found</p>
         </div>

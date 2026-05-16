@@ -17,6 +17,8 @@ import {
 import Image from "next/image";
 import { getSession, signIn } from "next-auth/react";
 import { toast } from "sonner";
+import { Mail, Lock, LogIn } from "lucide-react";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
@@ -117,112 +119,191 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="space-y-6 w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <h2 className="text-3xl font-bold text-center">Login</h2>
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-40 top-0 h-96 w-96 rounded-full bg-teal-500/30 blur-3xl" />
+        <div className="absolute -right-32 bottom-0 h-80 w-80 rounded-full bg-cyan-400/30 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.15),transparent_60%)]" />
+      </div>
 
-            {/* Email */}
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="Enter your email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 py-12">
+        <div className="grid w-full gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Left Side - Destination Poster */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col justify-center"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]">
+              Explore. Book. Go.
+            </div>
+            <h1 className="mt-6 text-4xl font-black leading-tight sm:text-5xl">
+              Your next escape starts here.
+              <span className="block text-teal-300">GuideHub Travel</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base text-slate-200/90 sm:text-lg">
+              Discover curated guides, build smart itineraries, and book trusted
+              experiences in minutes.
+            </p>
 
-            {/* Password */}
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Enter your password"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-xs uppercase tracking-widest text-teal-200/80">
+                  This week
+                </p>
+                <p className="mt-2 text-lg font-semibold">Sundarban Sunrise</p>
+                <p className="text-sm text-slate-300">4 days • River trails</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-xs uppercase tracking-widest text-teal-200/80">
+                  Trending
+                </p>
+                <p className="mt-2 text-lg font-semibold">Cox’s Bazar Coast</p>
+                <p className="text-sm text-slate-300">3 days • Beach walk</p>
+              </div>
+            </div>
+          </motion.div>
 
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-          </form>
-        </Form>
+          {/* Right Side - Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="w-full"
+          >
+            <div className="rounded-3xl bg-white/95 p-8 text-slate-900 shadow-2xl ring-1 ring-white/40 backdrop-blur sm:p-10">
+              <div>
+                <h2 className="text-2xl font-bold">Welcome back</h2>
+                <p className="mt-2 text-sm text-slate-600">
+                  Log in to manage bookings, itineraries, and guide services.
+                </p>
+              </div>
 
-        {/* OR */}
-        <div className="flex items-center justify-center space-x-2">
-          <div className="h-px w-16 bg-gray-300" />
-          <span className="text-sm text-gray-500">or</span>
-          <div className="h-px w-16 bg-gray-300" />
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="mt-6 space-y-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">Email</FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Mail className="absolute left-3 top-2.5 h-5 w-5 text-slate-400" />
+                            <Input
+                              type="email"
+                              placeholder="you@example.com"
+                              className="h-11 rounded-2xl border-slate-200 pl-10 focus:border-teal-500 focus:ring-teal-500"
+                              {...field}
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-700">
+                          Password
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Lock className="absolute left-3 top-2.5 h-5 w-5 text-slate-400" />
+                            <Input
+                              type="password"
+                              placeholder="••••••••"
+                              className="h-11 rounded-2xl border-slate-200 pl-10 focus:border-teal-500 focus:ring-teal-500"
+                              {...field}
+                            />
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <Button
+                    type="submit"
+                    className="w-full rounded-2xl bg-teal-600 text-white shadow-lg shadow-teal-200/70 hover:bg-teal-700"
+                  >
+                    <LogIn className="mr-2 h-5 w-5" />
+                    Sign In
+                  </Button>
+                </form>
+              </Form>
+
+              <div className="my-6 flex items-center gap-3">
+                <div className="h-px w-full bg-slate-200" />
+                <span className="text-xs uppercase tracking-widest text-slate-400">
+                  or
+                </span>
+                <div className="h-px w-full bg-slate-200" />
+              </div>
+
+              <Button
+                variant="outline"
+                className="w-full rounded-2xl border-slate-200 text-slate-700 hover:bg-slate-50"
+                onClick={handleGoogleLogin}
+              >
+                <Image
+                  src="https://img.icons8.com/color/24/google-logo.png"
+                  alt="Google"
+                  width={20}
+                  height={20}
+                />
+                <span className="ml-2">Continue with Google</span>
+              </Button>
+
+              <div className="mt-6 rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+                  Demo shortcuts
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleInstantDemoLogin("admin")}
+                    className="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-teal-400 hover:text-teal-700"
+                  >
+                    Admin
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleInstantDemoLogin("guide")}
+                    className="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-teal-400 hover:text-teal-700"
+                  >
+                    Guide
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleInstantDemoLogin("tourist")}
+                    className="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 hover:border-teal-400 hover:text-teal-700"
+                  >
+                    Tourist
+                  </button>
+                </div>
+              </div>
+
+              <p className="mt-6 text-center text-sm text-slate-600">
+                New here?{" "}
+                <Link
+                  href="/register"
+                  className="font-semibold text-teal-700 hover:text-teal-800"
+                >
+                  Create an account
+                </Link>
+              </p>
+            </div>
+          </motion.div>
         </div>
-
-        {/* GOOGLE */}
-        <Button
-          variant="outline"
-          className="w-full flex items-center gap-2"
-          onClick={handleGoogleLogin}
-        >
-          <Image
-            src="https://img.icons8.com/color/24/google-logo.png"
-            alt="Google"
-            width={20}
-            height={20}
-          />
-          Login with Google
-        </Button>
-
-        {/*  DEMO LOGIN */}
-        <div className="mt-4 space-y-3">
-          <p className="text-center text-sm text-gray-500">Demo Login</p>
-
-          <div className="grid grid-cols-3 gap-2">
-            <Button
-              variant="outline"
-              onClick={() => handleInstantDemoLogin("admin")}
-            >
-              Admin
-            </Button>
-
-            <Button
-              variant="outline"
-              onClick={() => handleInstantDemoLogin("guide")}
-            >
-              Guide
-            </Button>
-
-            <Button
-              variant="outline"
-              onClick={() => handleInstantDemoLogin("tourist")}
-            >
-              Tourist
-            </Button>
-          </div>
-        </div>
-
-        <p className="text-center text-sm text-gray-500 mt-4">
-          Don’t have an account?{" "}
-          <Link href="/register" className="text-blue-500 hover:underline">
-            Register
-          </Link>
-        </p>
       </div>
     </div>
   );

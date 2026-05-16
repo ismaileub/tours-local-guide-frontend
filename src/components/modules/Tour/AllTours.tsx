@@ -52,9 +52,9 @@ const AllTours = () => {
 
       const data = await res.json();
 
-      setTours(data.data);
-      setTotalPages(data.meta.totalPages);
-      setTotalItems(data.meta.total);
+      setTours(data?.data);
+      setTotalPages(data?.meta?.totalPages || 1);
+      setTotalItems(data?.meta?.total || 0);
     } catch (error) {
       console.error("Failed to fetch tours", error);
     } finally {
@@ -85,14 +85,14 @@ const AllTours = () => {
       {/* skeleton */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading
-          ? Array.from({ length: itemsPerPage }).map((_, index) => (
+          ? Array.from({ length: itemsPerPage })?.map((_, index) => (
               <TourCardSkeleton key={index} />
             ))
           : tours?.map((tour) => <TourCard key={tour._id} tour={tour} />)}
       </div>
 
       {/* Empty State */}
-      {!loading && tours.length === 0 && (
+      {!loading && tours?.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
           No tours available with this type
         </p>
